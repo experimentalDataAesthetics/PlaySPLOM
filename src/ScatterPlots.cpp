@@ -15,42 +15,65 @@
 
 
 void ScatterPlots::draw() {
-    // outer border
-    ofPushStyle();
-    ofSetColor(borderColor);
-    ofNoFill();
-    ofDrawRectangle(frame.x, frame.y, frame.width, frame.height);
-    ofPopStyle();
+    // always set color to white before drawing an FBO to main
+    ofSetColor(255, 255, 255);
+    plotterFbo.draw(0, 0);
 
-    // auto&& access by reference
-    for (auto &box : boxes) {
-        // border
-        ofPushStyle();
-        ofSetColor(borderColor);
-        ofNoFill();
-        ofDrawRectangle(box.frame);
-        ofPopStyle();
-
-        ofSetColor(pointColor);
-        ofPushMatrix(); {
-            ofTranslate(box.frame.x, box.frame.y);
-            for (auto &point : box.points) {
-                ofDrawCircle(
-                  point.x * boxWidth,
-                  point.y * boxHeight,
-                  pointRadius);
-            }
-        } ofPopMatrix();
+    ofPushMatrix();
+    // unflip opengl so that origin is bottom left, going up
+    glTranslated(0, plotterFbo.getHeight(), 0);
+    glScalef(1, -1, 1);
+    {
+        // hovering box
+        // focused box
+        // hovering/playing color on top of activated points
+        brush.draw();
+        highlightPoints(brush.pointsUnderBrush, hoverPointColor);
     }
-
-    // hovering box
-    // focused box
-    // hovering/playing color on top of activated points
-
-    brush.draw();
-    highlightPoints(brush.pointsUnderBrush, hoverPointColor);
+    ofPopMatrix();
 }
 
+void ScatterPlots::redrawPlotter() {
+    plotterFbo.begin();
+    ofClear(plotterBackground.r, plotterBackground.b, plotterBackground.g, plotterBackground.a);
+    
+    ofPushMatrix();
+    ofPushStyle();
+    {
+        // unflip opengl so that origin is bottom left, going up
+        glTranslated(0, plotterFbo.getHeight(), 0);
+        glScalef(1, -1, 1);
+
+        // outer border
+        ofSetColor(borderColor);
+        ofNoFill();
+        ofDrawRectangle(frame.x, frame.y, frame.width, frame.height);
+
+        ofSetCircleResolution(8);
+        // auto&& access by reference
+        for (auto &box : boxes) {
+            // border
+            ofSetColor(borderColor);
+            ofNoFill();
+            ofDrawRectangle(box.frame);
+
+            ofSetColor(pointColor);
+            ofFill();
+            ofPushMatrix(); {
+                ofTranslate(box.frame.x, box.frame.y);
+                for (auto &point : box.points) {
+                    ofDrawCircle(
+                                 point.x * boxWidth,
+                                 point.y * boxHeight,
+                                 pointRadius);
+                }
+            } ofPopMatrix();
+        }
+    }
+    ofPopStyle();
+    ofPopMatrix();
+    plotterFbo.end();
+}
 
 void ScatterPlots::highlightPoints(const set<int> &points, const ofColor &color) {
     ofSetColor(color);
@@ -71,6 +94,11 @@ void ScatterPlots::highlightPoints(const set<int> &points, const ofColor &color)
 void ScatterPlots::setFrame(ofRectangle rect) {
     frame = rect;
     updateBoxSizes();
+    if (plotterFbo.isAllocated()) {
+        plotterFbo.clear();
+    }
+    plotterFbo.allocate(rect.width, rect.height, GL_RGBA);  // 32F_ARB
+    redrawPlotter();
 }
 
 void ScatterPlots::updateBoxSizes() {
@@ -111,9 +139,11 @@ void ScatterPlots::setData(const DataSource& dataSource) {
         }
     }
     updateBoxSizes();
+    redrawPlotter();
 }
 
 ofRectangle ScatterPlots::boxFrameAt(const BoxCoordinates &coords) {
+    // TODO(crucialfelix): use a map
     for (auto box : boxes) {
         if (box.m == coords.m && box.n == coords.n) {
             return box.frame;
@@ -123,6 +153,7 @@ ofRectangle ScatterPlots::boxFrameAt(const BoxCoordinates &coords) {
 }
 
 vector<ofPoint> ScatterPlots::normalizedPointsAtBox(const BoxCoordinates &coords) {
+    // TODO(crucialfelix): use a map
     for (auto box : boxes) {
         if (box.m == coords.m && box.n == coords.n) {
             return box.points;

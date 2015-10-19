@@ -55,6 +55,7 @@ class ScatterPlots {
     };
 
     void updateBoxSizes();
+    void redrawPlotter();
     ofRectangle boxFrameAt(const BoxCoordinates &coords);
     vector<ofPoint> normalizedPointsAtBox(const BoxCoordinates &coords);
 
@@ -63,6 +64,7 @@ class ScatterPlots {
     float boxHeight{0};
     ofRectangle frame{0, 0, 0, 0};
     std::vector<Box> boxes{};
+    ofFbo plotterFbo;
 };
 
 

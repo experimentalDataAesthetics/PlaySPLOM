@@ -6,13 +6,16 @@
 
 //--------------------------------------------------------------
 void ofApp::setup() {
+    ofSetVerticalSync(true);
+    ofSetFrameRate(60);
+
     ofAddListener(dataSource.didLoadEvent, this, &ofApp::dataSourceDidLoad);
-    
+
     params.setup("settings", "settings.xml");
     params.add(scatterPlots.parameters);
     params.add(scatterPlots.brush.parameters);
     params.loadFromFile("settings.xml");
-    
+
     windowResized(ofGetWidth(), ofGetHeight());
 }
 
@@ -22,15 +25,9 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-    ofPushMatrix();
-    {
-        // unflip opengl so that origin is bottom left, going up
-        glTranslated(0, ofGetHeight(), 0);
-        glScalef(1, -1, 1);
-        scatterPlots.draw();
-    };
-    ofPopMatrix();
-    
+    ofBackground(100);
+
+    scatterPlots.draw();
     params.draw();
 }
 

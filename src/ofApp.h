@@ -29,7 +29,7 @@ class ofApp : public ofBaseApp {
     void gotMessage(ofMessage msg);
 
     void dataSourceDidLoad();
-    
+
     ofxPanel params;
 
  private:
