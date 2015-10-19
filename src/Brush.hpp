@@ -26,8 +26,8 @@ class Brush {
         : scatterPlots(scatterPlots)
         {
             parameters.setName("Brush");
-            parameters.add(brushWidth.set("width", 4, 1, 100));
-            parameters.add(brushHeight.set("height", 4, 1, 100));
+            parameters.add(brushWidth.set("width", 4, 1, 15));
+            parameters.add(brushHeight.set("height", 4, 1, 15));
         }
     void mouseMoved(int x, int y);
     void mouseDragged(int x, int y, int button);
@@ -41,8 +41,8 @@ class Brush {
 
     ofParameterGroup parameters;
     // ratio of point size
-    ofParameter<double> brushWidth{4};
-    ofParameter<double> brushHeight{4};
+    ofParameter<int> brushWidth{4};
+    ofParameter<int> brushHeight{4};
 
     bool engaged{false};
     ofPoint hoverCenter{0, 0};

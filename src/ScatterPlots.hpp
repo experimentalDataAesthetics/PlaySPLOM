@@ -27,7 +27,7 @@ class ScatterPlots {
  public:
     ScatterPlots() {
         parameters.setName("Plotting");
-        parameters.add(pointRadius.set("point size", 2, 1, 20));
+        parameters.add(pointRadius.set("point size", 2, 1, 6));
     }
     void setFrame(ofRectangle rect);
     void setData(const DataSource& dataSource);
@@ -35,8 +35,8 @@ class ScatterPlots {
     void highlightPoints(const set<int> &points, const ofColor &color);
 
     ofParameterGroup parameters;
-    ofParameter<float> pointRadius{2.0};
-    
+    ofParameter<int> pointRadius{2};
+
     Brush brush{this};
 
  private:
