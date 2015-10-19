@@ -83,7 +83,6 @@ void ScatterPlots::updateBoxSizes() {
     }
     for (auto &box : boxes) {
         box.frame.x = box.m * boxWidth;
-        // need to invert the y
         box.frame.y = box.n * boxHeight;
         box.frame.width = boxWidth;
         box.frame.height = boxHeight;

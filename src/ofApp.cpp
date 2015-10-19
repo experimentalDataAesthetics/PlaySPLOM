@@ -19,6 +19,9 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
+    // unflip opengl so that origin is bottom left, going up
+    glTranslated(0, ofGetHeight(), 0);
+    glScalef(1, -1, 1);
     scatterPlots.draw();
 }
 
@@ -32,22 +35,22 @@ void ofApp::keyReleased(int key) {
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y) {
-    scatterPlots.brush.mouseMoved(x, y);
+    scatterPlots.brush.mouseMoved(x, ofGetHeight() - y);
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button) {
-    scatterPlots.brush.mouseDragged(x, y, button);
+    scatterPlots.brush.mouseDragged(x, ofGetHeight() - y, button);
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button) {
-    scatterPlots.brush.mousePressed(x, y, button);
+    scatterPlots.brush.mousePressed(x, ofGetHeight() - y, button);
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button) {
-    scatterPlots.brush.mouseReleased(x, y, button);
+    scatterPlots.brush.mouseReleased(x, ofGetHeight() - y, button);
 }
 
 //--------------------------------------------------------------

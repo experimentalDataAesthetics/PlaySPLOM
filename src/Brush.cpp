@@ -127,7 +127,6 @@ set<int> Brush::pointsInRect(const ofRectangle& rect) {
     // naive version. will optimize later
     // normalize the rect
     ofRectangle normalized = ofRectangle(rect);
-    // translate it by origin of hoveringBox
     ofRectangle boxFrame = scatterPlots->boxFrameAt(hoveringBox);
     // iterate points, very slow
     set<int> points;
