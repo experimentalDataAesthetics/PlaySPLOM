@@ -12,6 +12,8 @@
 
 #include <set>
 #include "ofMain.h"
+#include "ofParameterGroup.h"
+#include "ofParameter.h"
 #include "BoxCoordinates.hpp"
 
 // forward declaration
@@ -20,7 +22,13 @@ class ScatterPlots;
 
 class Brush {
  public:
-    explicit Brush(ScatterPlots* scatterPlots) : scatterPlots(scatterPlots) {}
+    explicit Brush(ScatterPlots* scatterPlots)
+        : scatterPlots(scatterPlots)
+        {
+            parameters.setName("Brush");
+            parameters.add(brushWidth.set("width", 4, 1, 100));
+            parameters.add(brushHeight.set("height", 4, 1, 100));
+        }
     void mouseMoved(int x, int y);
     void mouseDragged(int x, int y, int button);
     void mousePressed(int x, int y, int button);
@@ -31,9 +39,10 @@ class Brush {
     void draw();
     set<int> pointsInRect(const ofRectangle& rect);
 
+    ofParameterGroup parameters;
     // ratio of point size
-    double brushWidth{4};
-    double brushHeight{4};
+    ofParameter<double> brushWidth{4};
+    ofParameter<double> brushHeight{4};
 
     bool engaged{false};
     ofPoint hoverCenter{0, 0};

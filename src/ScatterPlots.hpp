@@ -13,6 +13,8 @@
 #include <stdio.h>
 #include <vector>
 #include <set>
+#include "ofParameterGroup.h"
+#include "ofParameter.h"
 #include "DataSource.hpp"
 #include "Brush.hpp"
 #include "BoxCoordinates.hpp"
@@ -23,12 +25,18 @@
 class ScatterPlots {
     friend class Brush;
  public:
+    ScatterPlots() {
+        parameters.setName("Plotting");
+        parameters.add(pointRadius.set("point size", 2, 1, 20));
+    }
     void setFrame(ofRectangle rect);
     void setData(const DataSource& dataSource);
     void draw();
     void highlightPoints(const set<int> &points, const ofColor &color);
 
-    float pointRadius{2.0};
+    ofParameterGroup parameters;
+    ofParameter<float> pointRadius{2.0};
+    
     Brush brush{this};
 
  private:

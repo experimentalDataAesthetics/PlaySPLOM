@@ -40,8 +40,6 @@ void Brush::mouseMoved(int x, int y) {
 }
 
 void Brush::brushMoved(int x, int y) {
-    // does not include click-drags
-    // y is inverted
     //    cout << x << "@" << y << endl;
     if (scatterPlots->frame.inside(x, y)) {
         hoverCenter.x = x;
@@ -54,10 +52,12 @@ void Brush::brushMoved(int x, int y) {
             ofNotifyEvent(boxHoverEvent, hoveringBox, this);
         }
 
+        // updateBrushRect
+        auto diam = scatterPlots->pointRadius.get() * 2;
         brushRect.setFromCenter(hoverCenter.x,
                                 hoverCenter.y,
-                                brushWidth * (scatterPlots->pointRadius * 2),
-                                brushHeight * (scatterPlots->pointRadius * 2));
+                                brushWidth.get() * diam,
+                                brushHeight.get() * diam);
     } else {
         hoveringBox.setNull();
         brushRect.setFromCenter(-1, -1, 0 , 0);

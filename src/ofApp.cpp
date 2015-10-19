@@ -2,15 +2,18 @@
 #include "ofApp.h"
 #include "ofMain.h"
 #include <stdio.h>
+#include "style.h"
 
 //--------------------------------------------------------------
 void ofApp::setup() {
-    auto width = ofGetWidth();
-    auto height = ofGetHeight();
-    auto rect = ofRectangle(0, 0, width, height);
-    scatterPlots.setFrame(rect);
-
     ofAddListener(dataSource.didLoadEvent, this, &ofApp::dataSourceDidLoad);
+    
+    params.setup("settings", "settings.xml");
+    params.add(scatterPlots.parameters);
+    params.add(scatterPlots.brush.parameters);
+    params.loadFromFile("settings.xml");
+    
+    windowResized(ofGetWidth(), ofGetHeight());
 }
 
 //--------------------------------------------------------------
@@ -19,10 +22,16 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-    // unflip opengl so that origin is bottom left, going up
-    glTranslated(0, ofGetHeight(), 0);
-    glScalef(1, -1, 1);
-    scatterPlots.draw();
+    ofPushMatrix();
+    {
+        // unflip opengl so that origin is bottom left, going up
+        glTranslated(0, ofGetHeight(), 0);
+        glScalef(1, -1, 1);
+        scatterPlots.draw();
+    };
+    ofPopMatrix();
+    
+    params.draw();
 }
 
 //--------------------------------------------------------------
@@ -63,8 +72,12 @@ void ofApp::mouseExited(int x, int y) {
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h) {
-    ofRectangle rect = ofRectangle(0, 0, w, h);
+    const double panelWidth = 220;
+    auto rect = ofRectangle(0, 0, w - panelWidth - gutter - gutter, h);
     scatterPlots.setFrame(rect);
+
+    // params.setWidth(panelWidth);
+    params.setPosition(w - panelWidth, 10);
 }
 
 //--------------------------------------------------------------

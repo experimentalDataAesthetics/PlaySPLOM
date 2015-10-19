@@ -5,6 +5,7 @@
 #define SRC_OFAPP_H_
 
 #include "ofMain.h"
+#include "ofxGui.h"
 #include "DataSource.hpp"
 #include "ScatterPlots.hpp"
 
@@ -28,6 +29,8 @@ class ofApp : public ofBaseApp {
     void gotMessage(ofMessage msg);
 
     void dataSourceDidLoad();
+    
+    ofxPanel params;
 
  private:
     DataSource dataSource{};
