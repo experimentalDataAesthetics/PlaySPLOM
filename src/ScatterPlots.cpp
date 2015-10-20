@@ -113,6 +113,11 @@ void ScatterPlots::updateBoxSizes() {
         boxWidth = frame.width - gutter;
         boxHeight = frame.height - gutter;
     }
+    if (boxWidth < boxHeight) {
+        boxHeight = boxWidth;
+    } else {
+        boxWidth = boxHeight;
+    }
     for (auto &box : boxes) {
         box.frame.x = box.m * boxWidth + gutter;
         box.frame.y = box.n * boxHeight + gutter;
