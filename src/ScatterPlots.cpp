@@ -63,8 +63,8 @@ void ScatterPlots::redrawPlotter() {
                 ofTranslate(box.frame.x, box.frame.y);
                 for (auto &point : box.points) {
                     ofDrawCircle(
-                                 point.x * boxWidth,
-                                 point.y * boxHeight,
+                                 point.x * box.frame.width,
+                                 point.y * box.frame.height,
                                  pointRadius);
                 }
             } ofPopMatrix();
@@ -82,8 +82,8 @@ void ScatterPlots::highlightPoints(const set<int> &points, const ofColor &color)
             ofTranslate(box.frame.x, box.frame.y);
             for (auto p : points) {
                 ofDrawCircle(
-                  box.points[p].x * boxWidth,
-                  box.points[p].y * boxHeight,
+                  box.points[p].x * box.frame.width,
+                  box.points[p].y * box.frame.height,
                   pointRadius);
             }
         } ofPopMatrix();
@@ -103,17 +103,17 @@ void ScatterPlots::setFrame(ofRectangle rect) {
 
 void ScatterPlots::updateBoxSizes() {
     if (numDimensions > 0) {
-        boxWidth = frame.width / numDimensions;
-        boxHeight = frame.height / numDimensions;
+        boxWidth = (frame.width - gutter) / numDimensions;
+        boxHeight = (frame.height - gutter) / numDimensions;
     } else {
-        boxWidth = frame.width;
-        boxHeight = frame.height;
+        boxWidth = frame.width - gutter;
+        boxHeight = frame.height - gutter;
     }
     for (auto &box : boxes) {
-        box.frame.x = box.m * boxWidth;
-        box.frame.y = box.n * boxHeight;
-        box.frame.width = boxWidth;
-        box.frame.height = boxHeight;
+        box.frame.x = box.m * boxWidth + gutter;
+        box.frame.y = box.n * boxHeight + gutter;
+        box.frame.width = boxWidth - gutter;
+        box.frame.height = boxHeight - gutter;
     }
 }
 
