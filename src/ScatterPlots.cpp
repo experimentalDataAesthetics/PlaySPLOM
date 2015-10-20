@@ -67,6 +67,10 @@ void ScatterPlots::redrawPlotter() {
                                  point.y * box.frame.height,
                                  pointRadius);
                 }
+                char label[20];
+                snprintf(label, sizeof(label), "%d,%d", box.m, box.n);
+                ofSetColor(labelColor);
+                ofDrawBitmapString(label, gutter, gutter);
             } ofPopMatrix();
         }
     }

@@ -12,7 +12,8 @@
 
 #include "ofMain.h"
 
-const ofColor plotterBackground = ofColor(255, 255, 255);
+const ofColor plotterBackground = ofColor(255);
+const ofColor labelColor = ofColor(10);
 const ofColor borderColor = ofColor(255, 130, 0);
 const ofColor pointColor = ofColor(0, 130, 255);
 const ofColor hoverPointColor = ofColor(255, 10, 20);
