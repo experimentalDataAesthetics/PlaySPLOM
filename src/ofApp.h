@@ -8,6 +8,7 @@
 #include "ofxGui.h"
 #include "DataSource.hpp"
 #include "ScatterPlots.hpp"
+#include "SuperCollider.hpp"
 
 
 class ofApp : public ofBaseApp {
@@ -31,6 +32,8 @@ class ofApp : public ofBaseApp {
     void dataSourceDidLoad();
 
     ofxPanel params;
+
+    SuperCollider superCollider;
 
  private:
     DataSource dataSource{};

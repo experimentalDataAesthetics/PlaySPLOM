@@ -1,0 +1,10 @@
+<settings>
+	<Plotting>
+		<point_size>2</point_size>
+	</Plotting>
+	<Brush>
+		<width>8</width>
+		<height>8</height>
+	</Brush>
+<settings/>
+</settings>

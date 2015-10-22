@@ -16,9 +16,11 @@ ICON_FILE_PATH = $(OF_PATH)/libs/openFrameworksCompiled/project/osx/
 OTHER_LDFLAGS = $(OF_CORE_LIBS) $(OF_CORE_FRAMEWORKS)
 HEADER_SEARCH_PATHS = $(OF_CORE_HEADERS)
 
+// USER_HEADER_SEARCH_PATHS = ./libs/process/
+
 // do not search down inside USER_HEADER_SEARCH_PATHS
 // its messy
-ALWAYS_SEARCH_USER_PATHS = NO
+ALWAYS_SEARCH_USER_PATHS = YES
 
 // should build for 10.7 but you need to download the SDK
 MACOSX_DEPLOYMENT_TARGET=10.7

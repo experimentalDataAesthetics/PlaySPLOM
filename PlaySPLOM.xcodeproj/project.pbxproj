@@ -15,7 +15,9 @@
 		33259C181BD50728007FD769 /* ofxSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33259C0D1BD50728007FD769 /* ofxSlider.cpp */; settings = {ASSET_TAGS = (); }; };
 		33259C191BD50728007FD769 /* ofxSliderGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33259C0F1BD50728007FD769 /* ofxSliderGroup.cpp */; settings = {ASSET_TAGS = (); }; };
 		33259C1A1BD50728007FD769 /* ofxToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33259C111BD50728007FD769 /* ofxToggle.cpp */; settings = {ASSET_TAGS = (); }; };
+		333FA9CF1BD913F700F984E8 /* data in CopyFiles */ = {isa = PBXBuildFile; fileRef = 333FA9CE1BD913F700F984E8 /* data */; };
 		3393035F1BCF9E3400EC1286 /* Brush.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3393035D1BCF9E3400EC1286 /* Brush.cpp */; settings = {ASSET_TAGS = (); }; };
+		33934E211BD8D46700B96EB9 /* SuperCollider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33934E1F1BD8D46700B96EB9 /* SuperCollider.cpp */; settings = {ASSET_TAGS = (); }; };
 		33E085701BCB93070054B404 /* DataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33E0856E1BCB93070054B404 /* DataSource.cpp */; settings = {ASSET_TAGS = (); }; };
 		33E0857A1BCC14A60054B404 /* ScatterPlots.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33E085711BCBAF9A0054B404 /* ScatterPlots.cpp */; settings = {ASSET_TAGS = (); }; };
 		33E9F4361BD011C700A64DE6 /* BoxCoordinates.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33E9F4341BD011C700A64DE6 /* BoxCoordinates.cpp */; settings = {ASSET_TAGS = (); }; };
@@ -46,8 +48,9 @@
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 10;
+			dstSubfolderSpec = 7;
 			files = (
+				333FA9CF1BD913F700F984E8 /* data in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,8 +75,11 @@
 		33259C101BD50728007FD769 /* ofxSliderGroup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxSliderGroup.h; sourceTree = "<group>"; };
 		33259C111BD50728007FD769 /* ofxToggle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxToggle.cpp; sourceTree = "<group>"; };
 		33259C121BD50728007FD769 /* ofxToggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxToggle.h; sourceTree = "<group>"; };
+		333FA9CE1BD913F700F984E8 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
 		3393035D1BCF9E3400EC1286 /* Brush.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Brush.cpp; sourceTree = "<group>"; };
 		3393035E1BCF9E3400EC1286 /* Brush.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Brush.hpp; sourceTree = "<group>"; };
+		33934E1F1BD8D46700B96EB9 /* SuperCollider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SuperCollider.cpp; sourceTree = "<group>"; };
+		33934E201BD8D46700B96EB9 /* SuperCollider.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SuperCollider.hpp; sourceTree = "<group>"; };
 		33E0856E1BCB93070054B404 /* DataSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataSource.cpp; sourceTree = "<group>"; };
 		33E0856F1BCB93070054B404 /* DataSource.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DataSource.hpp; sourceTree = "<group>"; };
 		33E085711BCBAF9A0054B404 /* ScatterPlots.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScatterPlots.cpp; sourceTree = "<group>"; };
@@ -162,6 +168,7 @@
 		E4B69B4A0A3A1720003C02F2 = {
 			isa = PBXGroup;
 			children = (
+				333FA9CE1BD913F700F984E8 /* data */,
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
@@ -186,6 +193,8 @@
 				33E9F4351BD011C700A64DE6 /* BoxCoordinates.hpp */,
 				33E085721BCBAF9A0054B404 /* ScatterPlots.hpp */,
 				33E085711BCBAF9A0054B404 /* ScatterPlots.cpp */,
+				33934E1F1BD8D46700B96EB9 /* SuperCollider.cpp */,
+				33934E201BD8D46700B96EB9 /* SuperCollider.hpp */,
 				33E9F4371BD01A2300A64DE6 /* style.h */,
 				332314521BCEAFE000188A9B /* mapping.h */,
 			);
@@ -294,6 +303,7 @@
 				33259C161BD50728007FD769 /* ofxLabel.cpp in Sources */,
 				33259C191BD50728007FD769 /* ofxSliderGroup.cpp in Sources */,
 				33E0857A1BCC14A60054B404 /* ScatterPlots.cpp in Sources */,
+				33934E211BD8D46700B96EB9 /* SuperCollider.cpp in Sources */,
 				33E085701BCB93070054B404 /* DataSource.cpp in Sources */,
 				33259C171BD50728007FD769 /* ofxPanel.cpp in Sources */,
 				33259C151BD50728007FD769 /* ofxGuiGroup.cpp in Sources */,
@@ -340,6 +350,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(OF_CORE_HEADERS)",
 					src,
+					./libs/process/,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
@@ -375,6 +386,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(OF_CORE_HEADERS)",
 					src,
+					./libs/process/,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CPLUSPLUSFLAGS = (
