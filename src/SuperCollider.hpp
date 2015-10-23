@@ -11,6 +11,9 @@
 
 #include <stdio.h>
 #include <Poco/Process.h>
+#define PORT 54312
+#define HOST "localhost"
+
 
 
 class SuperCollider {

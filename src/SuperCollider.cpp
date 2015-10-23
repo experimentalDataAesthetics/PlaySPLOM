@@ -7,6 +7,7 @@
 //
 
 #include "SuperCollider.hpp"
+#include <stdlib.h>
 #include <string>
 #include <vector>
 #include <iostream>
@@ -31,14 +32,26 @@ void SuperCollider::setup() {
 
     vector<string> args;
     args.push_back("-u");
-    args.push_back("54321");
-    Poco::Pipe outPipe, errorPipe;
+    args.push_back(std::to_string(PORT));
 
+    // do not register with rendezvous
+    args.push_back("-R");
+    args.push_back("0");
+
+    // load defs
+    args.push_back("-D");
+    args.push_back("1");
+    auto path = current_path();
+    const string synthDefEnvName = "SC_SYNTHDEF_PATH";
+    const char *synthdefPath = "data/supercollider/synthdefs";
+    setenv("SC_SYNTHDEF_PATH", synthdefPath, 1);
+
+    Poco::Pipe outPipe, errorPipe;
     ProcessHandle ph = Process::launch(command, args, 0, &outPipe, &errorPipe);
     pid = ph.id();
     auto isRunning = Process::isRunning(pid);
-    cout << "scsynth pid: " << pid << " running: " << isRunning <<endl;
     // should report dead
+    cout << "scsynth pid: " << pid << " running: " << isRunning << endl;
 }
 
 
