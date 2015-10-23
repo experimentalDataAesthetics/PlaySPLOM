@@ -28,6 +28,7 @@ void SuperCollider::setup() {
     // const string command = ofToDataPath("data/supercollider/scsynth");
     // cout << command << endl;
     // cout << current_path() << endl;
+
     const string command = "data/supercollider/scsynth";
 
     vector<string> args;
@@ -50,8 +51,11 @@ void SuperCollider::setup() {
     ProcessHandle ph = Process::launch(command, args, 0, &outPipe, &errorPipe);
     pid = ph.id();
     auto isRunning = Process::isRunning(pid);
-    // should report dead
     cout << "scsynth pid: " << pid << " running: " << isRunning << endl;
+    // should check sometimes and report if dead
+    // TODO(crucialfelix): pipe server to stdout/stderr
+
+    sender.setup(HOST, PORT);
 }
 
 

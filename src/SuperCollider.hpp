@@ -11,6 +11,8 @@
 
 #include <stdio.h>
 #include <Poco/Process.h>
+#include "ofxOsc.h"
+
 #define PORT 54312
 #define HOST "localhost"
 
@@ -29,6 +31,7 @@ class SuperCollider {
     void setup();
     void teardown();
     Poco::ProcessHandle::PID pid;
+    ofxOscSender sender;
 };
 
 #endif /* SuperCollider_hpp */
