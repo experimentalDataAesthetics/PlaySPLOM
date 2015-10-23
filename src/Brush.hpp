@@ -19,6 +19,7 @@
 // forward declaration
 class ScatterPlots;
 
+using PointIndexSet = set<int>;
 
 class Brush {
  public:
@@ -37,7 +38,7 @@ class Brush {
     void mouseExited(int x, int y);
 
     void draw();
-    set<int> pointsInRect(const ofRectangle& rect);
+    PointIndexSet pointsInRect(const ofRectangle& rect);
 
     ofParameterGroup parameters;
     // ratio of point size
@@ -46,7 +47,7 @@ class Brush {
 
     bool engaged{false};
     ofPoint hoverCenter{0, 0};
-    set<int> pointsUnderBrush{};
+    PointIndexSet pointsUnderBrush{};
 
     BoxCoordinates hoveringBox{};
     BoxCoordinates focusedBox{};
@@ -54,14 +55,12 @@ class Brush {
     // events
     ofEvent<BoxCoordinates> boxHoverEvent;
     ofEvent<BoxCoordinates> boxFocusEvent;
-    ofEvent<int> pointEnteringEvent;
-    ofEvent<int> pointExitingEvent;
     ofEvent<ofPoint> mouseMoveEvent;
     ofEvent<ofPoint> brushMoveEvent;
 
  private:
     BoxCoordinates boxForPoint(int x, int y);
-    void brushMoved(int x, int y);
+    void brushMoved(int x, int y, bool notify);
 
     ScatterPlots* scatterPlots;
     ofRectangle brushRect{-1, -1, 0, 0};

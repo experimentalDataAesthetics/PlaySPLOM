@@ -9,6 +9,7 @@
 #include "DataSource.hpp"
 #include "ScatterPlots.hpp"
 #include "SuperCollider.hpp"
+#include "Sonifier.hpp"
 
 
 class ofApp : public ofBaseApp {
@@ -33,11 +34,12 @@ class ofApp : public ofBaseApp {
 
     ofxPanel params;
 
-    SuperCollider superCollider;
 
  private:
     DataSource dataSource{};
     ScatterPlots scatterPlots{};
+    SuperCollider superCollider;
+    Sonifier sonifier{&scatterPlots.brush, &superCollider};
 };
 
 #endif  // SRC_OFAPP_H_

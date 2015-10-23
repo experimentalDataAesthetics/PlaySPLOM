@@ -36,7 +36,7 @@ void ScatterPlots::draw() {
 void ScatterPlots::redrawPlotter() {
     plotterFbo.begin();
     ofClear(plotterBackground.r, plotterBackground.b, plotterBackground.g, plotterBackground.a);
-    
+
     ofPushMatrix();
     ofPushStyle();
     {

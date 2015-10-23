@@ -13,6 +13,7 @@
 #include <set>
 #include "ScatterPlots.hpp"
 #include "style.h"
+#include "PointsEvent.hpp"
 using std::cout;
 using std::endl;
 
@@ -35,11 +36,10 @@ void Brush::draw() {
 //--------------------------------------------------------------
 void Brush::mouseMoved(int x, int y) {
     engaged = false;
-    brushMoved(x, y);
-    // notify hover entering/exiting
+    brushMoved(x, y, false);
 }
 
-void Brush::brushMoved(int x, int y) {
+void Brush::brushMoved(int x, int y, bool notify) {
     //    cout << x << "@" << y << endl;
     if (scatterPlots->frame.inside(x, y)) {
         hoverCenter.x = x;
@@ -63,10 +63,10 @@ void Brush::brushMoved(int x, int y) {
         brushRect.setFromCenter(-1, -1, 0 , 0);
     }
 
-    set<int> currentPointsUnderBrush = pointsInRect(brushRect);
+    PointIndexSet currentPointsUnderBrush = pointsInRect(brushRect);
     // std::cout << "current" << currentPointsUnderBrush.size() << endl;
 
-    set<int> entering, exiting;
+    PointIndexSet entering, exiting;
     for (auto p : currentPointsUnderBrush) {
         if (pointsUnderBrush.find(p) == pointsUnderBrush.end()) {
             entering.insert(p);
@@ -88,26 +88,34 @@ void Brush::brushMoved(int x, int y) {
     for (auto p : entering) {
         pointsUnderBrush.insert(p);
     }
+    if (notify) {
+        if (entering.size()) {
+            PointsEvent event = PointsEvent(PointsEventType::entering, hoveringBox, entering);
+            ofNotifyEvent(PointsEvent::events, event);
+        }
+        if (exiting.size()) {
+            PointsEvent event = PointsEvent(PointsEventType::exiting, hoveringBox, exiting);
+            ofNotifyEvent(PointsEvent::events, event);
+        }
+    }
 }
 
 //--------------------------------------------------------------
 void Brush::mouseDragged(int x, int y, int button) {
     engaged = true;
-    brushMoved(x, y);
-    // notify brush touch point entering / exiting
+    brushMoved(x, y, true);
 }
 
 //--------------------------------------------------------------
 void Brush::mousePressed(int x, int y, int button) {
     engaged = true;
-    brushMoved(x, y);
-    // notify brush touch point entering / exiting
+    brushMoved(x, y, true);
 }
 
 //--------------------------------------------------------------
 void Brush::mouseReleased(int x, int y, int button) {
     engaged = false;
-    brushMoved(x, y);
+    brushMoved(x, y, true);
 }
 
 //--------------------------------------------------------------
@@ -123,13 +131,13 @@ BoxCoordinates Brush::boxForPoint(int x, int y) {
     return BoxCoordinates(m, n);
 }
 
-set<int> Brush::pointsInRect(const ofRectangle& rect) {
+PointIndexSet Brush::pointsInRect(const ofRectangle& rect) {
     // naive version. will optimize later
     // normalize the rect
     ofRectangle normalized = ofRectangle(rect);
     ofRectangle boxFrame = scatterPlots->boxFrameAt(hoveringBox);
     // iterate points, very slow
-    set<int> points;
+    PointIndexSet points;
     if (boxFrame.width > 0) {
         auto widthScale = 1 / boxFrame.width;
         auto heightScale = 1 / boxFrame.height;
