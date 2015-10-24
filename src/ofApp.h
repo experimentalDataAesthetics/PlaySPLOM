@@ -39,7 +39,7 @@ class ofApp : public ofBaseApp {
     DataSource dataSource{};
     ScatterPlots scatterPlots{};
     SuperCollider superCollider;
-    Sonifier sonifier{&scatterPlots.brush, &superCollider};
+    Sonifier sonifier{&scatterPlots, &superCollider};
 };
 
 #endif  // SRC_OFAPP_H_

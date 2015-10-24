@@ -11,21 +11,21 @@
 
 #include <stdio.h>
 #include "SuperCollider.hpp"
-#include "Brush.hpp"
+#include "ScatterPlots.hpp"
 #include "PointsEvent.hpp"
 
 
 class Sonifier {
  public:
-    explicit Sonifier(Brush* brush, SuperCollider* superCollider)
-        : brush(brush), superCollider(superCollider)
+    explicit Sonifier(ScatterPlots* scatterPlots, SuperCollider* superCollider)
+        : scatterPlots(scatterPlots), superCollider(superCollider)
         {
             setup();
         }
     void pointsEntered(PointsEvent &event);
  private:
     void setup();
-    Brush* brush;
+    ScatterPlots* scatterPlots;
     SuperCollider* superCollider;
 };
 

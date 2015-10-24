@@ -7,7 +7,8 @@
 //
 
 #include "Sonifier.hpp"
-#include "SuperCollider.hpp"
+#include "mapping.hpp"
+
 
 void Sonifier::setup() {
     ofAddListener(PointsEvent::events, this, &Sonifier::pointsEntered);
@@ -15,10 +16,19 @@ void Sonifier::setup() {
 
 void Sonifier::pointsEntered(PointsEvent &event) {
     if (event.type == PointsEventType::entering) {
-        // BoxCoord PointsIndexSet
         // convert to args for a grain
         // |out, amp=0.1, freq=440, sustain=0.01, pan|
-        // << event.points
-        std::cout << event.coords.m << "@" << event.coords.n << std::endl;
+        auto normalizedPoints = scatterPlots->normalizedPointsAtBox(event.coords);
+        for (auto p : event.points) {
+            std::cout << event.coords.m << "@" << event.coords.n << "::" << p << std::endl;
+            auto normPoint = normalizedPoints.at(p);
+            SynthArgs args;
+            args["out"] = 0;
+            args["amp"] = 0.1;
+            args["freq"] = linlin(normPoint.y, 0.0, 1.0, 30, 5000);
+            args["sustain"] = 0.01;
+            args["pan"] = linlin(normPoint.x, -1, 1);
+            superCollider->grain("grain", args);
+        }
     }
 }

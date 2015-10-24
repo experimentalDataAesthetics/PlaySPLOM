@@ -66,3 +66,25 @@ void SuperCollider::teardown() {
         pid = -1;
     }
 }
+
+
+/**
+  * Spawn a sound grain in root group
+  */
+void SuperCollider::grain(const string &defName, SynthArgs args) {
+    if (!pid) {
+        return;
+    }
+    ofxOscMessage msg;
+    msg.setAddress("/s_new");
+    msg.addStringArg(defName);
+    msg.addIntArg(-1);
+    msg.addIntArg(0);
+    msg.addIntArg(0);
+    for (auto kv : args) {
+        msg.addStringArg(kv.first);
+        msg.addFloatArg(kv.second);
+        std::cout << kv.first << " = " << kv.second << endl;
+    }
+    sender.sendMessage(msg);
+}
