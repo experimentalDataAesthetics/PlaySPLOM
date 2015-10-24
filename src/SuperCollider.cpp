@@ -3,7 +3,7 @@
 //  PlaySPLOM
 //
 //  Created by Chris Sattinger on 22/10/15.
-//
+//  Copyright 2015 Chris Sattinger
 //
 
 #include "SuperCollider.hpp"
@@ -42,13 +42,14 @@ void SuperCollider::setup() {
     // load defs
     args.push_back("-D");
     args.push_back("1");
-    auto path = current_path();
-    const string synthDefEnvName = "SC_SYNTHDEF_PATH";
-    const char *synthdefPath = "data/supercollider/synthdefs";
-    setenv("SC_SYNTHDEF_PATH", synthdefPath, 1);
 
-    Poco::Pipe outPipe, errorPipe;
-    ProcessHandle ph = Process::launch(command, args, 0, &outPipe, &errorPipe);
+    auto path = current_path();
+    // TODO(crucialfelix): unix only, find a boost util
+    path += "/data/supercollider/synthdefs";
+    const string synthDefEnvName = "SC_SYNTHDEF_PATH";
+    setenv("SC_SYNTHDEF_PATH", path.c_str(), 1);
+
+    ProcessHandle ph = Process::launch(command, args);
     pid = ph.id();
     auto isRunning = Process::isRunning(pid);
     cout << "scsynth pid: " << pid << " running: " << isRunning << endl;
