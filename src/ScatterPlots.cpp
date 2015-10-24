@@ -11,7 +11,7 @@
 #include <vector>
 #include <set>
 #include "ofMain.h"
-#include "mapping.h"
+#include "mapping.hpp"
 
 
 void ScatterPlots::draw() {

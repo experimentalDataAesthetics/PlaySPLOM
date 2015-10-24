@@ -1,21 +1,19 @@
 //
-//  mapping.h
+//  mapping.cpp
 //  PlaySPLOM
 //
-//  Created by Chris Sattinger on 14/10/15.
-//  Copyright 2015 Chris Sattinger
+//  Created by Chris Sattinger on 23/10/15.
 //
 //
 
-#ifndef SRC_MAPPING_H_
-#define SRC_MAPPING_H_
-
+#include "mapping.hpp"
+#include <stdio.h>
 
 double linlin(double value,
-  double inMin,
-  double inMax,
-  double outMin,
-  double outMax) {
+              double inMin,
+              double inMax,
+              double outMin,
+              double outMax) {
     if (inMin == inMax) {
         return (outMin + outMax) / 2;
     }
@@ -26,9 +24,7 @@ double linlin(double value,
 }
 
 
+// normalize
 double linlin(double value, double inMin, double inMax) {
     return linlin(value, inMin, inMax, 0.0, 1.0);
 }
-
-
-#endif  // SRC_MAPPING_H_
