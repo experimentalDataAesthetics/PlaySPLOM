@@ -50,7 +50,7 @@ void ScatterPlots::redrawPlotter() {
         ofNoFill();
         ofDrawRectangle(frame.x, frame.y, frame.width, frame.height);
 
-        ofSetCircleResolution(8);
+        ofSetCircleResolution(pointRadius * 4);
         // auto&& access by reference
         for (auto &box : boxes) {
             // border
@@ -88,6 +88,7 @@ void ScatterPlots::highlightPoints(const set<int> &points, const ofColor &color,
     } else {
         ofNoFill();
     }
+    ofSetCircleResolution(pointRadius * 4);
     for (auto &box : boxes) {
         ofPushMatrix(); {
             ofTranslate(box.frame.x, box.frame.y);

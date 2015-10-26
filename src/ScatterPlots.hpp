@@ -28,6 +28,7 @@ class ScatterPlots {
     ScatterPlots() {
         parameters.setName("Plotting");
         parameters.add(pointRadius.set("point size", 2, 1, 6));
+        pointRadius.addListener(this, &ScatterPlots::pointRadiusDidChange);
     }
     void setFrame(ofRectangle rect);
     void setData(const DataSource& dataSource);
@@ -59,6 +60,9 @@ class ScatterPlots {
     void updateBoxSizes();
     void redrawPlotter();
     ofRectangle boxFrameAt(const BoxCoordinates &coords);
+    void pointRadiusDidChange(int& r) {
+        redrawPlotter();
+    }
 
     int numDimensions{0};
     float boxWidth{0};
