@@ -18,9 +18,11 @@ const ofColor labelColor = ofColor(10);
 const ofColor borderColor = ofColor(164, 164, 162);  // rgb(164, 164, 163)
 const ofColor pointColor = ofColor(0, 130, 255, 120);
 const ofColor hoverPointColor = ofColor(0, 250, 20, 120);
+const ofColor hoverFrameColor = ofColor(0, 250, 20);
 const ofColor engagedPointColor = ofColor(0, 250, 20, 120);
 const ofColor hoverBrushColor = ofColor(50, 250, 50, 120);
+const ofColor engagedFrameColor = ofColor(100, 250, 50);
 const ofColor engagedBrushColor = ofColor(100, 250, 50, 120);
-const int gutter = 4;
+const int gutter = 5;
 
 #endif  // SRC_STYLE_H_

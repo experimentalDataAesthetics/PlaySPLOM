@@ -60,6 +60,7 @@ class ScatterPlots {
     void updateBoxSizes();
     void redrawPlotter();
     ofRectangle boxFrameAt(const BoxCoordinates &coords);
+    ofRectangle boxFrameAt(int m, int n);
     void pointRadiusDidChange(int& r) {
         redrawPlotter();
     }

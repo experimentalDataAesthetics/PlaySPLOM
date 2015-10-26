@@ -25,7 +25,14 @@ void ScatterPlots::draw() {
     glScalef(1, -1, 1);
     {
         // hovering box
-        // focused box
+        if (!brush.hoveringBox.isNull()) {
+            ofNoFill();
+            auto boxFrame = boxFrameAt(brush.hoveringBox);
+            ofSetColor(brush.engaged ? engagedFrameColor : hoverFrameColor);
+            ofDrawRectangle(boxFrame);
+            auto counterPartFrame = boxFrameAt(brush.hoveringBox.n, brush.hoveringBox.m);
+            ofDrawRectangle(counterPartFrame);
+        }
         brush.draw();
         highlightPoints(brush.pointsUnderBrush,
                         brush.engaged ? engagedBrushColor : hoverPointColor,
@@ -179,6 +186,16 @@ ofRectangle ScatterPlots::boxFrameAt(const BoxCoordinates &coords) {
     // TODO(crucialfelix): use a map
     for (auto box : boxes) {
         if (box.m == coords.m && box.n == coords.n) {
+            return box.frame;
+        }
+    }
+    return ofRectangle();
+}
+
+ofRectangle ScatterPlots::boxFrameAt(int m, int n) {
+    // TODO(crucialfelix): use a map
+    for (auto box : boxes) {
+        if (box.m == m && box.n == n) {
             return box.frame;
         }
     }
