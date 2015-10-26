@@ -25,7 +25,7 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-    ofBackground(100);
+    ofBackground(settingsBackground);
 
     scatterPlots.draw();
     params.draw();

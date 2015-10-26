@@ -26,9 +26,10 @@ void ScatterPlots::draw() {
     {
         // hovering box
         // focused box
-        // hovering/playing color on top of activated points
         brush.draw();
-        highlightPoints(brush.pointsUnderBrush, hoverPointColor);
+        highlightPoints(brush.pointsUnderBrush,
+                        brush.engaged ? engagedBrushColor : hoverPointColor,
+                        brush.engaged);
     }
     ofPopMatrix();
 }
@@ -67,9 +68,10 @@ void ScatterPlots::redrawPlotter() {
                                  point.y * box.frame.height,
                                  pointRadius);
                 }
+                // label each combo box (temporary)
                 char label[20];
                 snprintf(label, sizeof(label), "%d,%d", box.m, box.n);
-                ofSetColor(labelColor);
+                ofSetColor(labelColor, 50);
                 ofDrawBitmapString(label, gutter, gutter);
             } ofPopMatrix();
         }
@@ -79,8 +81,13 @@ void ScatterPlots::redrawPlotter() {
     plotterFbo.end();
 }
 
-void ScatterPlots::highlightPoints(const set<int> &points, const ofColor &color) {
+void ScatterPlots::highlightPoints(const set<int> &points, const ofColor &color, bool fill) {
     ofSetColor(color);
+    if (fill) {
+        ofFill();
+    } else {
+        ofNoFill();
+    }
     for (auto &box : boxes) {
         ofPushMatrix(); {
             ofTranslate(box.frame.x, box.frame.y);
@@ -93,7 +100,6 @@ void ScatterPlots::highlightPoints(const set<int> &points, const ofColor &color)
         } ofPopMatrix();
     }
 }
-
 
 void ScatterPlots::setFrame(ofRectangle rect) {
     frame = rect;

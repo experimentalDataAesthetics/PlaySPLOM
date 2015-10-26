@@ -26,7 +26,7 @@ void debugBox(string label, const BoxCoordinates &box) {
 //--------------------------------------------------------------
 void Brush::draw() {
     ofFill();
-    ofSetColor(engaged ? brushActivatedColor : brushHoverColor, 80);
+    ofSetColor(engaged ? engagedBrushColor : hoverBrushColor);
     ofDrawRectangle(brushRect);
 
     // hovering box

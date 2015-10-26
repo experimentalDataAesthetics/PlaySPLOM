@@ -32,7 +32,7 @@ class ScatterPlots {
     void setFrame(ofRectangle rect);
     void setData(const DataSource& dataSource);
     void draw();
-    void highlightPoints(const set<int> &points, const ofColor &color);
+    void highlightPoints(const set<int> &points, const ofColor &color, bool fill);
     vector<ofPoint> normalizedPointsAtBox(const BoxCoordinates &coords);
     BoxCoordinates boxForPoint(int x, int y);
 
