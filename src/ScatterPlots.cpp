@@ -53,27 +53,29 @@ void ScatterPlots::redrawPlotter() {
         ofSetCircleResolution(pointRadius * 4);
         // auto&& access by reference
         for (auto &box : boxes) {
-            // border
-            ofSetColor(borderColor);
-            ofNoFill();
-            ofDrawRectangle(box.frame);
+            if (box.m != box.n) {
+              // border
+              ofSetColor(borderColor);
+              ofNoFill();
+              ofDrawRectangle(box.frame);
 
-            ofSetColor(pointColor);
-            ofFill();
-            ofPushMatrix(); {
-                ofTranslate(box.frame.x, box.frame.y);
-                for (auto &point : box.points) {
-                    ofDrawCircle(
-                                 point.x * box.frame.width,
-                                 point.y * box.frame.height,
-                                 pointRadius);
-                }
-                // label each combo box (temporary)
-                char label[20];
-                snprintf(label, sizeof(label), "%d,%d", box.m, box.n);
-                ofSetColor(labelColor, 50);
-                ofDrawBitmapString(label, gutter, gutter);
-            } ofPopMatrix();
+              ofSetColor(pointColor);
+              ofFill();
+              ofPushMatrix(); {
+                  ofTranslate(box.frame.x, box.frame.y);
+                  for (auto &point : box.points) {
+                      ofDrawCircle(
+                                   point.x * box.frame.width,
+                                   point.y * box.frame.height,
+                                   pointRadius);
+                  }
+                  // label each combo box (temporary)
+                  char label[20];
+                  snprintf(label, sizeof(label), "%d,%d", box.m, box.n);
+                  ofSetColor(labelColor);
+                  ofDrawBitmapString(label, gutter, gutter);
+              } ofPopMatrix();
+            }
         }
     }
     ofPopStyle();
@@ -90,15 +92,17 @@ void ScatterPlots::highlightPoints(const set<int> &points, const ofColor &color,
     }
     ofSetCircleResolution(pointRadius * 4);
     for (auto &box : boxes) {
-        ofPushMatrix(); {
-            ofTranslate(box.frame.x, box.frame.y);
-            for (auto p : points) {
-                ofDrawCircle(
-                  box.points[p].x * box.frame.width,
-                  box.points[p].y * box.frame.height,
-                  pointRadius);
-            }
-        } ofPopMatrix();
+        if (box.m != box.n) {
+            ofPushMatrix(); {
+                ofTranslate(box.frame.x, box.frame.y);
+                for (auto p : points) {
+                    ofDrawCircle(
+                                 box.points[p].x * box.frame.width,
+                                 box.points[p].y * box.frame.height,
+                                 pointRadius);
+                }
+            } ofPopMatrix();
+        }
     }
 }
 
@@ -129,7 +133,7 @@ void ScatterPlots::updateBoxSizes() {
     leftMargin = (frame.width -  (boxWidth * numDimensions)) / 2;
     for (auto &box : boxes) {
         box.frame.x = box.m * boxWidth + gutter + leftMargin;
-        box.frame.y = box.n * boxHeight + gutter;
+        box.frame.y = (numDimensions - box.n - 1) * boxHeight + gutter;
         box.frame.width = boxWidth - gutter;
         box.frame.height = boxHeight - gutter;
     }
@@ -161,9 +165,14 @@ void ScatterPlots::setData(const DataSource& dataSource) {
 }
 
 BoxCoordinates ScatterPlots::boxForPoint(int x, int y) {
-    const int m = (x - leftMargin) / boxWidth;
-    const int n = y / boxHeight;
-    return BoxCoordinates(m, n);
+    // TODO(crucialfelix): calculate don't iterate
+    for (auto box : boxes) {
+        if (box.frame.inside(x, y)) {
+            return BoxCoordinates(box.m, box.n);
+        }
+    }
+    // null
+    return BoxCoordinates();
 }
 
 ofRectangle ScatterPlots::boxFrameAt(const BoxCoordinates &coords) {
