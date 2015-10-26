@@ -59,7 +59,6 @@ class Brush {
     ofEvent<ofPoint> brushMoveEvent;
 
  private:
-    BoxCoordinates boxForPoint(int x, int y);
     void brushMoved(int x, int y, bool notify);
 
     ScatterPlots* scatterPlots;

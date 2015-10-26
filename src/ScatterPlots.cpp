@@ -118,8 +118,10 @@ void ScatterPlots::updateBoxSizes() {
     } else {
         boxWidth = boxHeight;
     }
+    // center them
+    leftMargin = (frame.width -  (boxWidth * numDimensions)) / 2;
     for (auto &box : boxes) {
-        box.frame.x = box.m * boxWidth + gutter;
+        box.frame.x = box.m * boxWidth + gutter + leftMargin;
         box.frame.y = box.n * boxHeight + gutter;
         box.frame.width = boxWidth - gutter;
         box.frame.height = boxHeight - gutter;
@@ -149,6 +151,12 @@ void ScatterPlots::setData(const DataSource& dataSource) {
     }
     updateBoxSizes();
     redrawPlotter();
+}
+
+BoxCoordinates ScatterPlots::boxForPoint(int x, int y) {
+    const int m = (x - leftMargin) / boxWidth;
+    const int n = y / boxHeight;
+    return BoxCoordinates(m, n);
 }
 
 ofRectangle ScatterPlots::boxFrameAt(const BoxCoordinates &coords) {

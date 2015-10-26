@@ -45,7 +45,7 @@ void Brush::brushMoved(int x, int y, bool notify) {
         hoverCenter.x = x;
         hoverCenter.y = y;
 
-        BoxCoordinates nowHoveringBox = boxForPoint(x, y);
+        BoxCoordinates nowHoveringBox = scatterPlots->boxForPoint(x, y);
         if (!nowHoveringBox.equals(hoveringBox)) {
             // cout << "new box" << endl;
             hoveringBox = nowHoveringBox;
@@ -124,12 +124,6 @@ void Brush::mouseEntered(int x, int y) {}
 //--------------------------------------------------------------
 void Brush::mouseExited(int x, int y) {}
 
-
-BoxCoordinates Brush::boxForPoint(int x, int y) {
-    const int m = x / scatterPlots->boxWidth;
-    const int n = y / scatterPlots->boxHeight;
-    return BoxCoordinates(m, n);
-}
 
 PointIndexSet Brush::pointsInRect(const ofRectangle& rect) {
     // naive version. will optimize later

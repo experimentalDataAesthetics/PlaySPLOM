@@ -34,6 +34,7 @@ class ScatterPlots {
     void draw();
     void highlightPoints(const set<int> &points, const ofColor &color);
     vector<ofPoint> normalizedPointsAtBox(const BoxCoordinates &coords);
+    BoxCoordinates boxForPoint(int x, int y);
 
     ofParameterGroup parameters;
     ofParameter<int> pointRadius{2};
@@ -62,6 +63,7 @@ class ScatterPlots {
     int numDimensions{0};
     float boxWidth{0};
     float boxHeight{0};
+    float leftMargin{0};
     ofRectangle frame{0, 0, 0, 0};
     std::vector<Box> boxes{};
     ofFbo plotterFbo;
