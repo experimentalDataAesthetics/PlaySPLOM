@@ -42,6 +42,10 @@ void DataSource::load(const string& pathName) {
         } else {
             parseLine(line);
             numDimensions = points.at(0).size();
+            // titles is an array of 0..numDimensions-1
+            for (int i = 0; i < numDimensions; i++) {
+                titles.push_back(std::to_string(i));
+            }
         }
         while (getline(data, line)) {
             parseLine(line);

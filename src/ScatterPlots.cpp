@@ -19,26 +19,28 @@ void ScatterPlots::draw() {
     ofSetColor(255, 255, 255);
     plotterFbo.draw(0, 0);
 
-    ofPushMatrix();
-    // unflip opengl so that origin is bottom left, going up
-    glTranslated(0, plotterFbo.getHeight(), 0);
-    glScalef(1, -1, 1);
-    {
-        // hovering box
-        if (!brush.hoveringBox.isNull()) {
-            ofNoFill();
-            auto boxFrame = boxFrameAt(brush.hoveringBox);
-            ofSetColor(brush.engaged ? engagedFrameColor : hoverFrameColor);
-            ofDrawRectangle(boxFrame);
-            auto counterPartFrame = boxFrameAt(brush.hoveringBox.n, brush.hoveringBox.m);
-            ofDrawRectangle(counterPartFrame);
+    if (!brush.hoveringBox.isIdentityBox()) {
+        ofPushMatrix();
+        // unflip opengl so that origin is bottom left, going up
+        glTranslated(0, plotterFbo.getHeight(), 0);
+        glScalef(1, -1, 1);
+        {
+            // hovering box
+            if (!brush.hoveringBox.isNull()) {
+                ofNoFill();
+                auto boxFrame = boxFrameAt(brush.hoveringBox);
+                ofSetColor(brush.engaged ? engagedFrameColor : hoverFrameColor);
+                ofDrawRectangle(boxFrame);
+                auto counterPartFrame = boxFrameAt(brush.hoveringBox.n, brush.hoveringBox.m);
+                ofDrawRectangle(counterPartFrame);
+            }
+            brush.draw();
+            highlightPoints(brush.pointsUnderBrush,
+                            brush.engaged ? engagedBrushColor : hoverPointColor,
+                            brush.engaged);
         }
-        brush.draw();
-        highlightPoints(brush.pointsUnderBrush,
-                        brush.engaged ? engagedBrushColor : hoverPointColor,
-                        brush.engaged);
+        ofPopMatrix();
     }
-    ofPopMatrix();
 }
 
 void ScatterPlots::redrawPlotter() {
@@ -82,6 +84,13 @@ void ScatterPlots::redrawPlotter() {
                   ofSetColor(labelColor);
                   ofDrawBitmapString(label, gutter, gutter);
               } ofPopMatrix();
+            } else {
+                // identity box: draw the label
+                ofSetColor(labelColor);
+                ofPushMatrix();
+                ofTranslate(box.frame.x, box.frame.y);
+                ofDrawBitmapString(titles[box.m], gutter, box.frame.height / 2);
+                ofPopMatrix();
             }
         }
     }
@@ -149,6 +158,7 @@ void ScatterPlots::updateBoxSizes() {
 void ScatterPlots::setData(const DataSource& dataSource) {
     numDimensions = dataSource.numDimensions;
     boxes.clear();
+    titles = dataSource.titles;
 
     // create boxes with normalized point sets
     for (int m = 0; m < numDimensions; m++) {

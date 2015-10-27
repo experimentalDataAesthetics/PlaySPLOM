@@ -24,6 +24,9 @@ class BoxCoordinates {
     bool isNull() const {
         return m == -1;
     }
+    bool isIdentityBox() const {
+        return m == n && (m != -1);
+    }
     bool equals(const BoxCoordinates& that) {
         return m == that.m && n == that.n;
     }
