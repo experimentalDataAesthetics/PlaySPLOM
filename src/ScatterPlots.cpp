@@ -158,11 +158,13 @@ void ScatterPlots::updateBoxSizes() {
     } else {
         boxWidth = boxHeight;
     }
-    // center them
-    leftMargin = (frame.width -  (boxWidth * numDimensions)) / 2;
+    // center them in the frame
+    auto leftMargin = (frame.width -  (boxWidth * numDimensions)) / 2;
+    // and move them up the top
+    auto bottomMargin = (frame.height -  (boxHeight * numDimensions));
     for (auto &box : boxes) {
         box.frame.x = box.m * boxWidth + gutter + leftMargin;
-        box.frame.y = (numDimensions - box.n - 1) * boxHeight + gutter;
+        box.frame.y = (numDimensions - box.n - 1) * boxHeight + bottomMargin;
         box.frame.width = boxWidth - gutter;
         box.frame.height = boxHeight - gutter;
     }

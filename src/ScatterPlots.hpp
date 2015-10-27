@@ -68,7 +68,6 @@ class ScatterPlots {
     int numDimensions{0};
     float boxWidth{0};
     float boxHeight{0};
-    float leftMargin{0};
     std::vector<string> titles;
     ofRectangle frame{0, 0, 0, 0};
     std::vector<Box> boxes{};
