@@ -33,6 +33,19 @@ void ScatterPlots::draw() {
                 ofDrawRectangle(boxFrame);
                 auto counterPartFrame = boxFrameAt(brush.hoveringBox.n, brush.hoveringBox.m);
                 ofDrawRectangle(counterPartFrame);
+                // fill the two identity boxes dark with white label
+                if (brush.engaged) {
+                    ofFill();
+                    ofSetColor(inverseBoxColor);
+                    auto boxM = boxFrameAt(brush.hoveringBox.m, brush.hoveringBox.m);
+                    ofDrawRectangle(boxM);
+                    auto boxN = boxFrameAt(brush.hoveringBox.n, brush.hoveringBox.n);
+                    ofDrawRectangle(boxN);
+                    // labels
+                    ofSetColor(inverseTextColor);
+                    ofDrawBitmapString(titles[brush.hoveringBox.m], boxM.x + gutter, boxM.y + boxFrame.height / 2);
+                    ofDrawBitmapString(titles[brush.hoveringBox.n], boxN.x + gutter, boxN.y + boxFrame.height / 2);
+                }
             }
             brush.draw();
             highlightPoints(brush.pointsUnderBrush,
