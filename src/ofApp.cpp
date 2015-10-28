@@ -12,6 +12,7 @@ void ofApp::setup() {
     ofAddListener(dataSource.didLoadEvent, this, &ofApp::dataSourceDidLoad);
 
     params.setup("settings", "settings.xml");
+    params.add(dataSource.parameters);
     params.add(scatterPlots.parameters);
     params.add(scatterPlots.brush.parameters);
     params.loadFromFile("settings.xml");

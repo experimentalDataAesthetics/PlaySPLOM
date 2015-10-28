@@ -12,18 +12,23 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <boost/filesystem.hpp>
 
 
 // using std::cout;
 // using std::endl;
 
 
-void DataSource::load(const string& pathName) {
+void DataSource::load(const string& argPathName) {
     titles.clear();
     points.clear();
     mins.clear();
     maxes.clear();
     numDimensions = 0;
+
+    boost::filesystem::path p(argPathName);
+    pathName = p.string();
+    title = p.filename().string();
 
     ifstream data(pathName);
 
