@@ -67,11 +67,6 @@ void ScatterPlots::redrawPlotter() {
         glTranslated(0, plotterFbo.getHeight(), 0);
         glScalef(1, -1, 1);
 
-        // outer border
-        ofSetColor(borderColor);
-        ofNoFill();
-        ofDrawRectangle(frame.x, frame.y, frame.width, frame.height);
-
         ofSetCircleResolution(pointRadius * 4);
         // auto&& access by reference
         for (auto &box : boxes) {
