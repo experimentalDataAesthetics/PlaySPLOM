@@ -26,7 +26,7 @@ const ofColor engagedFrameColor = ofColor(100, 250, 50);
 const ofColor engagedBrushColor = ofColor(100, 250, 50, 120);
 
 // the label/identity box background color when brush is engaged
-const ofColor inverseBoxColor = ofColor(0, 250, 20, 80);
+const ofColor inverseBoxColor = ofColor(0, 250, 20, 40);
 const ofColor inverseTextColor = ofColor(0);
 
 const int gutter = 5;
