@@ -21,3 +21,14 @@ It is started as a separate process, isolated from any other SuperCollider you m
 It is copied into the .app Resources folder.
 
 The other platforms will be included and supported later.
+
+
+## Compiling SynthDefs
+
+supercollider.js includes a tool for compiling SuperCollider files and compiling the synth defs including a JSON dump of all meta data for those.
+
+Install supercolliderjs (`npm install -g supercolliderjs`)
+
+```shell
+compile-synthdefs synthdefs/*.scd data/supercollider/synthdefs/
+```
