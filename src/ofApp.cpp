@@ -79,7 +79,7 @@ void ofApp::mouseExited(int x, int y) {
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h) {
-    const double panelWidth = 220;
+    const double panelWidth = 310;
     auto rect = ofRectangle(0, 0, w - panelWidth - gutter - gutter, h);
     scatterPlots.setFrame(rect);
 }
