@@ -10,6 +10,7 @@
 #define Sonifier_hpp
 
 #include <stdio.h>
+#include <string>
 #include "SuperCollider.hpp"
 #include "ScatterPlots.hpp"
 #include "PointsEvent.hpp"
@@ -23,6 +24,11 @@ class Sonifier {
             setup();
         }
     void pointsEntered(PointsEvent &event);
+    void selectSynthDef(int ix);
+    string sound();
+
+    SynthDef synthDef;
+
  private:
     void setup();
     ScatterPlots* scatterPlots;

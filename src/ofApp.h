@@ -30,9 +30,21 @@ class ofApp : public ofBaseApp {
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
 
+    // events
     void dataSourceDidLoad();
+    void onOfxDatGuiButtonEvent(ofxDatGuiButtonEvent e);
+    void onOfxDatGuiDropdownEvent(ofxDatGuiDropdownEvent e);
+    void onOfxDatGuiSliderEvent(ofxDatGuiSliderEvent e);
 
  private:
+    struct GuiControls {
+        ofxDatGuiButton *loadButton;
+        ofxDatGuiDropdown *selectSound;
+        ofxDatGuiSlider *pointRadius;
+        ofxDatGuiSlider *brushWidth;
+        ofxDatGuiSlider *brushHeight;
+    };
+
     void setupGui();
     
     DataSource dataSource{};
@@ -40,6 +52,7 @@ class ofApp : public ofBaseApp {
     SuperCollider superCollider;
     Sonifier sonifier{&scatterPlots, &superCollider};
     ofxDatGui* gui;
+    GuiControls controls{};
 };
 
 #endif  // SRC_OFAPP_H_

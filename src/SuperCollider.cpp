@@ -132,3 +132,15 @@ void SuperCollider::grain(const string &defName, SynthArgs args) {
     }
     sender.sendMessage(msg);
 }
+
+
+vector<string> SuperCollider::defNames() {
+    vector<string> names;
+    for (auto sd : synthDefs) {
+        names.push_back(sd.name);
+    }
+    return names;
+}
+
+
+

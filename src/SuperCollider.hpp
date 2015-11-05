@@ -36,7 +36,9 @@ class SuperCollider {
     ~SuperCollider() {
         teardown();
     }
+
     void grain(const string& defName, SynthArgs args);
+    std::vector<string> defNames();
 
     std::vector<SynthDef> synthDefs;
 

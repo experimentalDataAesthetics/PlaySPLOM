@@ -27,6 +27,7 @@ class ScatterPlots {
     void setFrame(ofRectangle rect);
     void setData(const DataSource& dataSource);
     void draw();
+    void redrawPlotter();
     void highlightPoints(const set<int> &points, const ofColor &color, bool fill);
     vector<ofPoint> normalizedPointsAtBox(const BoxCoordinates &coords);
     BoxCoordinates boxForPoint(int x, int y);
@@ -51,12 +52,8 @@ class ScatterPlots {
     };
 
     void updateBoxSizes();
-    void redrawPlotter();
     ofRectangle boxFrameAt(const BoxCoordinates &coords);
     ofRectangle boxFrameAt(int m, int n);
-    void pointRadiusDidChange(int& r) {
-        redrawPlotter();
-    }
 
     int numDimensions{0};
     float boxWidth{0};

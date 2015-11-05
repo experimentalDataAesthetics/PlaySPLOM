@@ -18,7 +18,17 @@ void ofApp::setup() {
 
 void ofApp::setupGui() {
     gui = new ofxDatGui(ofxDatGuiAnchor::TOP_RIGHT);
+    controls.loadButton = gui->addButton("Click to load dataset");
+    controls.selectSound = gui->addDropdown("Sound", superCollider.defNames());
+    controls.pointRadius = gui->addSlider("Point radius", 1, 6, 2);
+    controls.brushWidth = gui->addSlider("Brush Width", 1, 15, 4);
+    controls.brushHeight = gui->addSlider("Brush Height", 1, 15, 4);
+    // gui->addColorPicker("Brush Color", engagedPointColor);
     gui->addFRM(1.0f);
+
+    gui->onButtonEvent(this, &ofApp::onOfxDatGuiButtonEvent);
+    gui->onSliderEvent(this, &ofApp::onOfxDatGuiSliderEvent);
+    gui->onDropdownEvent(this, &ofApp::onOfxDatGuiDropdownEvent);
 }
 
 //--------------------------------------------------------------
@@ -86,4 +96,29 @@ void ofApp::dragEvent(ofDragInfo dragInfo) {
 
 void ofApp::dataSourceDidLoad() {
     scatterPlots.setData(dataSource);
+    controls.loadButton->setLabel(dataSource.title);
+}
+
+
+void ofApp::onOfxDatGuiButtonEvent(ofxDatGuiButtonEvent e) {
+    if (e.target == controls.loadButton) {
+        // initial load file dialog
+    }
+}
+
+void ofApp::onOfxDatGuiDropdownEvent(ofxDatGuiDropdownEvent e) {
+    if (e.target == controls.selectSound) {
+        sonifier.selectSynthDef(e.child);
+    }
+}
+
+void ofApp::onOfxDatGuiSliderEvent(ofxDatGuiSliderEvent e) {
+    if (e.target == controls.brushHeight) {
+        scatterPlots.brush.brushHeight = e.value;
+    } else if (e.target == controls.brushWidth) {
+        scatterPlots.brush.brushWidth = e.value;
+    } else if (e.target == controls.pointRadius) {
+        scatterPlots.pointRadius = e.value;
+        scatterPlots.redrawPlotter();
+    }
 }

@@ -32,3 +32,15 @@ void Sonifier::pointsEntered(PointsEvent &event) {
         }
     }
 }
+
+
+void Sonifier::selectSynthDef(int i) {
+    if (i < superCollider->synthDefs.size()) {
+        synthDef = superCollider->synthDefs[i];
+    }
+}
+
+string Sonifier::sound() {
+    return synthDef.name;
+}
+
