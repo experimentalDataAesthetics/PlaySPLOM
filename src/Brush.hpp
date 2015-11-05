@@ -5,15 +5,12 @@
 //  Created by Chris Sattinger on 15/10/15.
 //  Copyright 2015 Chris Sattinger
 //
-//
 
 #ifndef Brush_hpp
 #define Brush_hpp
 
 #include <set>
 #include "ofMain.h"
-#include "ofParameterGroup.h"
-#include "ofParameter.h"
 #include "BoxCoordinates.hpp"
 
 // forward declaration
@@ -24,12 +21,7 @@ using PointIndexSet = set<int>;
 class Brush {
  public:
     explicit Brush(ScatterPlots* scatterPlots)
-        : scatterPlots(scatterPlots)
-        {
-            parameters.setName("Brush");
-            parameters.add(brushWidth.set("width", 4, 1, 15));
-            parameters.add(brushHeight.set("height", 4, 1, 15));
-        }
+        : scatterPlots(scatterPlots) { }
     void mouseMoved(int x, int y);
     void mouseDragged(int x, int y, int button);
     void mousePressed(int x, int y, int button);
@@ -40,10 +32,9 @@ class Brush {
     void draw();
     PointIndexSet pointsInRect(const ofRectangle& rect);
 
-    ofParameterGroup parameters;
     // ratio of point size
-    ofParameter<int> brushWidth{4};
-    ofParameter<int> brushHeight{4};
+    int brushWidth{4};
+    int brushHeight{4};
 
     bool engaged{false};
     ofPoint hoverCenter{0, 0};

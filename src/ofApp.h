@@ -5,7 +5,7 @@
 #define SRC_OFAPP_H_
 
 #include "ofMain.h"
-#include "ofxGui.h"
+#include "ofxDatGui.h"
 #include "DataSource.hpp"
 #include "ScatterPlots.hpp"
 #include "SuperCollider.hpp"
@@ -32,14 +32,14 @@ class ofApp : public ofBaseApp {
 
     void dataSourceDidLoad();
 
-    ofxPanel params;
-
-
  private:
+    void setupGui();
+    
     DataSource dataSource{};
     ScatterPlots scatterPlots{};
     SuperCollider superCollider;
     Sonifier sonifier{&scatterPlots, &superCollider};
+    ofxDatGui* gui;
 };
 
 #endif  // SRC_OFAPP_H_

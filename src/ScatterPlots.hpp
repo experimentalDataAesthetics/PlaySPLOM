@@ -12,24 +12,18 @@
 
 #include <stdio.h>
 #include <vector>
+#include <string>
 #include <set>
-#include "ofParameterGroup.h"
-#include "ofParameter.h"
 #include "DataSource.hpp"
 #include "Brush.hpp"
 #include "BoxCoordinates.hpp"
 #include "ofMain.h"
-#include "style.h"
+#include "./style.h"
 
 
 class ScatterPlots {
     friend class Brush;
  public:
-    ScatterPlots() {
-        parameters.setName("Plotting");
-        parameters.add(pointRadius.set("point size", 2, 1, 6));
-        pointRadius.addListener(this, &ScatterPlots::pointRadiusDidChange);
-    }
     void setFrame(ofRectangle rect);
     void setData(const DataSource& dataSource);
     void draw();
@@ -37,8 +31,7 @@ class ScatterPlots {
     vector<ofPoint> normalizedPointsAtBox(const BoxCoordinates &coords);
     BoxCoordinates boxForPoint(int x, int y);
 
-    ofParameterGroup parameters;
-    ofParameter<int> pointRadius{2};
+    int pointRadius{2};
 
     Brush brush{this};
 

@@ -11,13 +11,14 @@ void ofApp::setup() {
 
     ofAddListener(dataSource.didLoadEvent, this, &ofApp::dataSourceDidLoad);
 
-    params.setup("settings", "settings.xml");
-    params.add(dataSource.parameters);
-    params.add(scatterPlots.parameters);
-    params.add(scatterPlots.brush.parameters);
-    params.loadFromFile("settings.xml");
-
     windowResized(ofGetWidth(), ofGetHeight());
+
+    setupGui();
+}
+
+void ofApp::setupGui() {
+    gui = new ofxDatGui(ofxDatGuiAnchor::TOP_RIGHT);
+    gui->addFRM(1.0f);
 }
 
 //--------------------------------------------------------------
@@ -27,9 +28,7 @@ void ofApp::update() {
 //--------------------------------------------------------------
 void ofApp::draw() {
     ofBackground(settingsBackground);
-
     scatterPlots.draw();
-    params.draw();
 }
 
 //--------------------------------------------------------------
@@ -73,9 +72,6 @@ void ofApp::windowResized(int w, int h) {
     const double panelWidth = 220;
     auto rect = ofRectangle(0, 0, w - panelWidth - gutter - gutter, h);
     scatterPlots.setFrame(rect);
-
-    // params.setWidth(panelWidth);
-    params.setPosition(w - panelWidth, 10);
 }
 
 //--------------------------------------------------------------

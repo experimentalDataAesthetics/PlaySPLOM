@@ -53,11 +53,11 @@ void Brush::brushMoved(int x, int y, bool notify) {
         }
 
         // updateBrushRect
-        auto diam = scatterPlots->pointRadius.get() * 2;
+        auto diam = scatterPlots->pointRadius * 2;
         brushRect.setFromCenter(hoverCenter.x,
                                 hoverCenter.y,
-                                brushWidth.get() * diam,
-                                brushHeight.get() * diam);
+                                brushWidth * diam,
+                                brushHeight * diam);
     } else {
         hoveringBox.setNull();
         brushRect.setFromCenter(-1, -1, 0 , 0);
