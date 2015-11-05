@@ -8,16 +8,23 @@
 
 #include "SuperCollider.hpp"
 #include <stdlib.h>
+#include <Poco/JSON/JSON.h>
+#include <Poco/Pipe.h>
+#include <Poco/JSON/Parser.h>
+#include <Poco/Array.h>
+#include <Poco/Dynamic/Var.h>
 #include <string>
 #include <vector>
 #include <iostream>
-#include <Poco/Pipe.h>
 #include "boost/filesystem.hpp"
 #include "ofMain.h"
 
+using boost::filesystem::path;
+using boost::filesystem::current_path;
 using Poco::Process;
 using Poco::ProcessHandle;
-using boost::filesystem::current_path;
+using Poco::JSON::Object;
+using Poco::DynamicStruct;
 using std::string;
 using std::vector;
 using std::cout;
@@ -25,11 +32,12 @@ using std::endl;
 
 
 void SuperCollider::setup() {
-    // const string command = ofToDataPath("data/supercollider/scsynth");
-    // cout << command << endl;
-    // cout << current_path() << endl;
+    // boost converts paths for windows
+    auto command = path("data/supercollider/scsynth");
 
-    const string command = "data/supercollider/scsynth";
+    auto sdpath = current_path();
+    sdpath /= "data/supercollider/synthdefs";
+    synthDefPath = sdpath.string();
 
     vector<string> args;
     args.push_back("-u");
@@ -40,23 +48,18 @@ void SuperCollider::setup() {
     args.push_back("0");
 
     // load defs
+    setenv("SC_SYNTHDEF_PATH", synthDefPath.c_str(), 1);
     args.push_back("-D");
     args.push_back("1");
 
-    auto path = current_path();
-    // TODO(crucialfelix): unix only, find a boost util
-    path += "/data/supercollider/synthdefs";
-    const string synthDefEnvName = "SC_SYNTHDEF_PATH";
-    setenv("SC_SYNTHDEF_PATH", path.c_str(), 1);
-
-    ProcessHandle ph = Process::launch(command, args);
+    ProcessHandle ph = Process::launch(command.c_str(), args);
     pid = ph.id();
     auto isRunning = Process::isRunning(pid);
     cout << "scsynth pid: " << pid << " running: " << isRunning << endl;
     // should check sometimes and report if dead
-    // TODO(crucialfelix): pipe server to stdout/stderr
 
     sender.setup(HOST, PORT);
+    loadSynthDefs();
 }
 
 
@@ -66,6 +69,47 @@ void SuperCollider::teardown() {
         pid = -1;
     }
 }
+
+
+void SuperCollider::loadSynthDefs() {
+    auto synthDefsJsonPath = path(synthDefPath) /= "synthDefs.json";
+    if (!exists(synthDefsJsonPath)) {
+        return;
+    }
+    std::ifstream file(synthDefsJsonPath.string());
+    if (file) {
+        Poco::JSON::Parser parser;
+        Poco::Dynamic::Var parsed = parser.parse(file);
+        Poco::Dynamic::Var result = parser.result();
+        file.close();
+
+        Poco::DynamicStruct jsonStruct =
+          *result.extract<Object::Ptr>();
+        for (Object::ConstIterator itr = jsonStruct.begin(), end = jsonStruct.end(); itr != end; ++itr) {
+            SynthDef synthDef;
+            synthDef.name = itr->first;
+            auto defData = itr->second;
+            if (defData.isStruct()) {
+                DynamicStruct defStruct = jsonStruct[itr->first].extract<DynamicStruct>();
+                for (auto defPair : defStruct) {
+                    auto key = defPair.first;
+                    cout << key << endl;
+                    if (key == "controlNames") {
+                        auto lst = defPair.second;
+                        if (lst.isVector()) {
+                            for (auto controlName : lst) {
+                                synthDef.controls.push_back(controlName.toString());
+                            }
+                        }
+                    }
+                }
+            }
+            cout << synthDef.name << endl;
+            synthDefs.push_back(synthDef);
+        }
+    }
+}
+
 
 
 /**
@@ -84,7 +128,7 @@ void SuperCollider::grain(const string &defName, SynthArgs args) {
     for (auto kv : args) {
         msg.addStringArg(kv.first);
         msg.addFloatArg(kv.second);
-        std::cout << kv.first << " = " << kv.second << endl;
+        cout << kv.first << " = " << kv.second << endl;
     }
     sender.sendMessage(msg);
 }
