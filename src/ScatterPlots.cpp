@@ -5,7 +5,6 @@
 //  Created by Chris Sattinger on 12/10/15.
 //  Copyright 2015 Chris Sattinger
 //
-//
 
 #include "ScatterPlots.hpp"
 #include <vector>
@@ -21,6 +20,7 @@ void ScatterPlots::draw() {
 
     if (!brush.hoveringBox.isIdentityBox()) {
         ofPushMatrix();
+        ofPushStyle();
         // unflip opengl so that origin is bottom left, going up
         glTranslated(0, plotterFbo.getHeight(), 0);
         glScalef(1, -1, 1);
@@ -52,6 +52,7 @@ void ScatterPlots::draw() {
                             brush.engaged ? engagedBrushColor : hoverPointColor,
                             brush.engaged);
         }
+        ofPopStyle();
         ofPopMatrix();
     }
 }
@@ -108,6 +109,7 @@ void ScatterPlots::redrawPlotter() {
 }
 
 void ScatterPlots::highlightPoints(const set<int> &points, const ofColor &color, bool fill) {
+    ofPushStyle();
     ofSetColor(color);
     if (fill) {
         ofFill();
@@ -128,6 +130,7 @@ void ScatterPlots::highlightPoints(const set<int> &points, const ofColor &color,
             } ofPopMatrix();
         }
     }
+    ofPopStyle();
 }
 
 void ScatterPlots::setFrame(ofRectangle rect) {
