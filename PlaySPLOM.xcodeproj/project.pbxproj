@@ -33,6 +33,9 @@
 		335609C41BDAA323005AE56C /* mapping.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 335609C31BDAA323005AE56C /* mapping.cpp */; settings = {ASSET_TAGS = (); }; };
 		3393035F1BCF9E3400EC1286 /* Brush.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3393035D1BCF9E3400EC1286 /* Brush.cpp */; settings = {ASSET_TAGS = (); }; };
 		33934E211BD8D46700B96EB9 /* SuperCollider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33934E1F1BD8D46700B96EB9 /* SuperCollider.cpp */; settings = {ASSET_TAGS = (); }; };
+		33D803871BEB692700BD68A3 /* ofxDatGuiComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33D8037B1BEB692700BD68A3 /* ofxDatGuiComponent.cpp */; settings = {ASSET_TAGS = (); }; };
+		33D803881BEB692700BD68A3 /* ofxDatGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33D803811BEB692700BD68A3 /* ofxDatGui.cpp */; settings = {ASSET_TAGS = (); }; };
+		33D803891BEB692700BD68A3 /* ofxDatGuiTemplate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33D803841BEB692700BD68A3 /* ofxDatGuiTemplate.cpp */; settings = {ASSET_TAGS = (); }; };
 		33E085701BCB93070054B404 /* DataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33E0856E1BCB93070054B404 /* DataSource.cpp */; settings = {ASSET_TAGS = (); }; };
 		33E0857A1BCC14A60054B404 /* ScatterPlots.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33E085711BCBAF9A0054B404 /* ScatterPlots.cpp */; settings = {ASSET_TAGS = (); }; };
 		33E9F4361BD011C700A64DE6 /* BoxCoordinates.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33E9F4341BD011C700A64DE6 /* BoxCoordinates.cpp */; settings = {ASSET_TAGS = (); }; };
@@ -132,6 +135,29 @@
 		3393035E1BCF9E3400EC1286 /* Brush.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Brush.hpp; sourceTree = "<group>"; };
 		33934E1F1BD8D46700B96EB9 /* SuperCollider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SuperCollider.cpp; sourceTree = "<group>"; };
 		33934E201BD8D46700B96EB9 /* SuperCollider.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SuperCollider.hpp; sourceTree = "<group>"; };
+		33D8036E1BEB692700BD68A3 /* ofxDatGui2dPad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxDatGui2dPad.h; sourceTree = "<group>"; };
+		33D8036F1BEB692700BD68A3 /* ofxDatGuiButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxDatGuiButton.h; sourceTree = "<group>"; };
+		33D803701BEB692700BD68A3 /* ofxDatGuiColorPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxDatGuiColorPicker.h; sourceTree = "<group>"; };
+		33D803711BEB692700BD68A3 /* ofxDatGuiControls.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxDatGuiControls.h; sourceTree = "<group>"; };
+		33D803721BEB692700BD68A3 /* ofxDatGuiFRM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxDatGuiFRM.h; sourceTree = "<group>"; };
+		33D803731BEB692700BD68A3 /* ofxDatGuiGroups.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxDatGuiGroups.h; sourceTree = "<group>"; };
+		33D803741BEB692700BD68A3 /* ofxDatGuiLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxDatGuiLabel.h; sourceTree = "<group>"; };
+		33D803751BEB692700BD68A3 /* ofxDatGuiMatrix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxDatGuiMatrix.h; sourceTree = "<group>"; };
+		33D803761BEB692700BD68A3 /* ofxDatGuiSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxDatGuiSlider.h; sourceTree = "<group>"; };
+		33D803771BEB692700BD68A3 /* ofxDatGuiTextInput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxDatGuiTextInput.h; sourceTree = "<group>"; };
+		33D803781BEB692700BD68A3 /* ofxDatGuiTextInputField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxDatGuiTextInputField.h; sourceTree = "<group>"; };
+		33D803791BEB692700BD68A3 /* ofxDatGuiTimeGraph.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxDatGuiTimeGraph.h; sourceTree = "<group>"; };
+		33D8037B1BEB692700BD68A3 /* ofxDatGuiComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxDatGuiComponent.cpp; sourceTree = "<group>"; };
+		33D8037C1BEB692700BD68A3 /* ofxDatGuiComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxDatGuiComponent.h; sourceTree = "<group>"; };
+		33D8037D1BEB692700BD68A3 /* ofxDatGuiConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxDatGuiConstants.h; sourceTree = "<group>"; };
+		33D8037E1BEB692700BD68A3 /* ofxDatGuiEvents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxDatGuiEvents.h; sourceTree = "<group>"; };
+		33D8037F1BEB692700BD68A3 /* ofxDatGuiFont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxDatGuiFont.h; sourceTree = "<group>"; };
+		33D803801BEB692700BD68A3 /* ofxDatGuiIntObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxDatGuiIntObject.h; sourceTree = "<group>"; };
+		33D803811BEB692700BD68A3 /* ofxDatGui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxDatGui.cpp; sourceTree = "<group>"; };
+		33D803821BEB692700BD68A3 /* ofxDatGui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxDatGui.h; sourceTree = "<group>"; };
+		33D803841BEB692700BD68A3 /* ofxDatGuiTemplate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxDatGuiTemplate.cpp; sourceTree = "<group>"; };
+		33D803851BEB692700BD68A3 /* ofxDatGuiTemplate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxDatGuiTemplate.h; sourceTree = "<group>"; };
+		33D803861BEB692700BD68A3 /* ofxDatGuiTemplates.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxDatGuiTemplates.h; sourceTree = "<group>"; };
 		33E0856E1BCB93070054B404 /* DataSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataSource.cpp; sourceTree = "<group>"; };
 		33E0856F1BCB93070054B404 /* DataSource.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DataSource.hpp; sourceTree = "<group>"; };
 		33E085711BCBAF9A0054B404 /* ScatterPlots.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScatterPlots.cpp; sourceTree = "<group>"; };
@@ -291,6 +317,69 @@
 			path = osc;
 			sourceTree = "<group>";
 		};
+		33D8036B1BEB692700BD68A3 /* ofxDatGui */ = {
+			isa = PBXGroup;
+			children = (
+				33D8036C1BEB692700BD68A3 /* src */,
+			);
+			name = ofxDatGui;
+			sourceTree = "<group>";
+		};
+		33D8036C1BEB692700BD68A3 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				33D8036D1BEB692700BD68A3 /* components */,
+				33D8037A1BEB692700BD68A3 /* core */,
+				33D803811BEB692700BD68A3 /* ofxDatGui.cpp */,
+				33D803821BEB692700BD68A3 /* ofxDatGui.h */,
+				33D803831BEB692700BD68A3 /* templates */,
+			);
+			name = src;
+			path = ../../../addons/ofxDatGui/src;
+			sourceTree = "<group>";
+		};
+		33D8036D1BEB692700BD68A3 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				33D8036E1BEB692700BD68A3 /* ofxDatGui2dPad.h */,
+				33D8036F1BEB692700BD68A3 /* ofxDatGuiButton.h */,
+				33D803701BEB692700BD68A3 /* ofxDatGuiColorPicker.h */,
+				33D803711BEB692700BD68A3 /* ofxDatGuiControls.h */,
+				33D803721BEB692700BD68A3 /* ofxDatGuiFRM.h */,
+				33D803731BEB692700BD68A3 /* ofxDatGuiGroups.h */,
+				33D803741BEB692700BD68A3 /* ofxDatGuiLabel.h */,
+				33D803751BEB692700BD68A3 /* ofxDatGuiMatrix.h */,
+				33D803761BEB692700BD68A3 /* ofxDatGuiSlider.h */,
+				33D803771BEB692700BD68A3 /* ofxDatGuiTextInput.h */,
+				33D803781BEB692700BD68A3 /* ofxDatGuiTextInputField.h */,
+				33D803791BEB692700BD68A3 /* ofxDatGuiTimeGraph.h */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
+		33D8037A1BEB692700BD68A3 /* core */ = {
+			isa = PBXGroup;
+			children = (
+				33D8037B1BEB692700BD68A3 /* ofxDatGuiComponent.cpp */,
+				33D8037C1BEB692700BD68A3 /* ofxDatGuiComponent.h */,
+				33D8037D1BEB692700BD68A3 /* ofxDatGuiConstants.h */,
+				33D8037E1BEB692700BD68A3 /* ofxDatGuiEvents.h */,
+				33D8037F1BEB692700BD68A3 /* ofxDatGuiFont.h */,
+				33D803801BEB692700BD68A3 /* ofxDatGuiIntObject.h */,
+			);
+			path = core;
+			sourceTree = "<group>";
+		};
+		33D803831BEB692700BD68A3 /* templates */ = {
+			isa = PBXGroup;
+			children = (
+				33D803841BEB692700BD68A3 /* ofxDatGuiTemplate.cpp */,
+				33D803851BEB692700BD68A3 /* ofxDatGuiTemplate.h */,
+				33D803861BEB692700BD68A3 /* ofxDatGuiTemplates.h */,
+			);
+			path = templates;
+			sourceTree = "<group>";
+		};
 		6948EE371B920CB800B5AC1A /* local_addons */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,6 +392,7 @@
 			children = (
 				33259C001BD50728007FD769 /* ofxGui */,
 				333FA9D01BD9268600F984E8 /* ofxOsc */,
+				33D8036B1BEB692700BD68A3 /* ofxDatGui */,
 			);
 			name = addons;
 			sourceTree = "<group>";
@@ -335,18 +425,18 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
+				33E0856F1BCB93070054B404 /* DataSource.hpp */,
+				33E0856E1BCB93070054B404 /* DataSource.cpp */,
+				33E085721BCBAF9A0054B404 /* ScatterPlots.hpp */,
+				33E085711BCBAF9A0054B404 /* ScatterPlots.cpp */,
 				335609BD1BDA72B8005AE56C /* Sonifier.cpp */,
 				335609BE1BDA72B8005AE56C /* Sonifier.hpp */,
 				3393035E1BCF9E3400EC1286 /* Brush.hpp */,
 				3393035D1BCF9E3400EC1286 /* Brush.cpp */,
 				335609C11BDA8B5E005AE56C /* PointsEvent.hpp */,
 				335609C01BDA8B5E005AE56C /* PointsEvent.cpp */,
-				33E0856F1BCB93070054B404 /* DataSource.hpp */,
-				33E0856E1BCB93070054B404 /* DataSource.cpp */,
 				33E9F4351BD011C700A64DE6 /* BoxCoordinates.hpp */,
 				33E9F4341BD011C700A64DE6 /* BoxCoordinates.cpp */,
-				33E085721BCBAF9A0054B404 /* ScatterPlots.hpp */,
-				33E085711BCBAF9A0054B404 /* ScatterPlots.cpp */,
 				33934E201BD8D46700B96EB9 /* SuperCollider.hpp */,
 				33934E1F1BD8D46700B96EB9 /* SuperCollider.cpp */,
 				332314521BCEAFE000188A9B /* mapping.hpp */,
@@ -454,18 +544,21 @@
 			files = (
 				3393035F1BCF9E3400EC1286 /* Brush.cpp in Sources */,
 				33259C1A1BD50728007FD769 /* ofxToggle.cpp in Sources */,
+				33D803871BEB692700BD68A3 /* ofxDatGuiComponent.cpp in Sources */,
 				333FA9FE1BD9268600F984E8 /* ofxOscReceiver.cpp in Sources */,
 				33E9F4361BD011C700A64DE6 /* BoxCoordinates.cpp in Sources */,
 				33259C161BD50728007FD769 /* ofxLabel.cpp in Sources */,
 				333FAA051BD9268600F984E8 /* OscReceivedElements.cpp in Sources */,
 				335609C21BDA8B5E005AE56C /* PointsEvent.cpp in Sources */,
 				33259C191BD50728007FD769 /* ofxSliderGroup.cpp in Sources */,
+				33D803881BEB692700BD68A3 /* ofxDatGui.cpp in Sources */,
 				333FAA021BD9268600F984E8 /* UdpSocket.cpp in Sources */,
 				333FAA041BD9268600F984E8 /* OscPrintReceivedElements.cpp in Sources */,
 				33E0857A1BCC14A60054B404 /* ScatterPlots.cpp in Sources */,
 				33934E211BD8D46700B96EB9 /* SuperCollider.cpp in Sources */,
 				33E085701BCB93070054B404 /* DataSource.cpp in Sources */,
 				33259C171BD50728007FD769 /* ofxPanel.cpp in Sources */,
+				33D803891BEB692700BD68A3 /* ofxDatGuiTemplate.cpp in Sources */,
 				33259C151BD50728007FD769 /* ofxGuiGroup.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				333FAA061BD9268600F984E8 /* OscTypes.cpp in Sources */,
