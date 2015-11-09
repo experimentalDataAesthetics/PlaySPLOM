@@ -20,9 +20,14 @@ void ofApp::setupGui() {
     gui = new ofxDatGui(ofxDatGuiAnchor::TOP_RIGHT);
     controls.loadButton = gui->addButton("Click to load dataset");
     controls.selectSound = gui->addDropdown("Sound", superCollider.defNames());
-    controls.pointRadius = gui->addSlider("Point radius", 1, 6, 2);
-    controls.brushWidth = gui->addSlider("Brush Width", 1, 15, 4);
-    controls.brushHeight = gui->addSlider("Brush Height", 1, 15, 4);
+    controls.selectSound->select(0);  // what is actual index of current sound ?
+    controls.pointRadius = gui->addSlider("Point radius", 1, 6, scatterPlots.pointRadius);
+    controls.brushWidth = gui->addSlider("Brush Width", 1, 15, scatterPlots.brush.brushWidth);
+    controls.brushHeight = gui->addSlider("Brush Height", 1, 15, scatterPlots.brush.brushHeight);
+    controls.amp = gui->addSlider("Amp", 0.0, 1.0, sonifier.amp);
+    controls.sustain = gui->addSlider("Sustain", 0.005, 1.0, sonifier.sustain);
+    controls.freqBase = gui->addSlider("Freq", 220, 3520, sonifier.freqBase);
+
     // gui->addColorPicker("Brush Color", engagedPointColor);
     gui->addFRM(1.0f);
 
@@ -120,5 +125,11 @@ void ofApp::onOfxDatGuiSliderEvent(ofxDatGuiSliderEvent e) {
     } else if (e.target == controls.pointRadius) {
         scatterPlots.pointRadius = e.value;
         scatterPlots.redrawPlotter();
+    } else if (e.target == controls.amp) {
+        sonifier.amp = e.value;
+    } else if (e.target == controls.sustain) {
+        sonifier.sustain = e.value;
+    } else if (e.target == controls.freqBase) {
+        sonifier.freqBase = e.value;
     }
 }

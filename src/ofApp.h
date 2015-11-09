@@ -43,6 +43,9 @@ class ofApp : public ofBaseApp {
         ofxDatGuiSlider *pointRadius;
         ofxDatGuiSlider *brushWidth;
         ofxDatGuiSlider *brushHeight;
+        ofxDatGuiSlider *amp;
+        ofxDatGuiSlider *sustain;
+        ofxDatGuiSlider *freqBase;
     };
 
     void setupGui();

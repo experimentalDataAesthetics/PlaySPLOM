@@ -3,7 +3,7 @@
 //  PlaySPLOM
 //
 //  Created by Chris Sattinger on 23/10/15.
-//
+//  Copyright 2015 Chris Sattinger
 //
 
 #ifndef Sonifier_hpp
@@ -24,8 +24,12 @@ class Sonifier {
             setup();
         }
     void pointsEntered(PointsEvent &event);
+    void sonifyPoint(ofPoint const &point);
     void selectSynthDef(int ix);
     string sound();
+    double freqBase{400};
+    double sustain{0.1};
+    double amp{0.2};
 
     SynthDef synthDef;
 
