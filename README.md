@@ -6,22 +6,25 @@ __Scatter Plot Matrix Sonification__
 
 This project requires *openFrameworks* 0.9
 
-Until 0.9 is officially released you can fetch a pre-release version from the nightly builds:
+  http://openframeworks.cc/download/
 
-http://openFrameworks.cc/download/
+Download that and open a terminal at the top level folder.
 
-You will need the *ofxDatGui* addon:
+You will need the *ofxDatGui* and *ofxJSON* addons:
 
     cd addons
     git clone https://github.com/braitsch/ofxDatGui.git
-
+    git clone https://github.com/jefftimesten/ofxJSON.git
 
 Then clone this repository into the `apps/myApps` directory of your *openFrameworks* copy:
 
     cd apps/myApps
     git clone https://github.com/experimentalDataAesthetics/PlaySPLOM.git
 
-Then open the xcodeproj in apps/myApps/PlaySPLOM and build that.
+Then open the xcodeproj in apps/myApps/PlaySPLOM
+
+Build and run that (target: PlaySPLOM, debug)
+
 
 ## Compatibility
 
