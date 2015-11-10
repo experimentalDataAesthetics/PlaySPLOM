@@ -13,6 +13,12 @@ void ofApp::setup() {
 
     windowResized(ofGetWidth(), ofGetHeight());
 
+    if (sonifier.sound() == "") {
+        if (superCollider.synthDefs.size() > 0) {
+            sonifier.selectSynthDef(0);
+        }
+    }
+    
     setupGui();
 }
 
