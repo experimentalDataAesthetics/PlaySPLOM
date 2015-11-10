@@ -22,24 +22,34 @@
     "controls": [
       {
         "name": "springfac",
-        "rate": "control",
-        "index": 0,
         "defaultValue": 15000,
-        "lag": 0
+        "lag": 0,
+        "rate": "control",
+        "index": 0
       },
       {
         "name": "damp",
-        "rate": "control",
-        "index": 1,
         "defaultValue": 0.0007999999797903,
-        "lag": 0
+        "lag": 0,
+        "rate": "control",
+        "index": 1
       },
       {
         "name": "amp",
-        "rate": "control",
-        "index": 2,
         "defaultValue": 0.5,
-        "lag": 0
+        "lag": 0,
+        "rate": "control",
+        "spec": {
+          "maxval": 1,
+          "minval": 0,
+          "class": "ControlSpec",
+          "default": 0,
+          "rate": "control",
+          "step": 0,
+          "warp": "amp",
+          "units": ""
+        },
+        "index": 2
       }
     ],
     "canFreeSynth": true,
@@ -67,31 +77,61 @@
     "controls": [
       {
         "name": "out",
-        "rate": "scalar",
-        "index": 0,
         "defaultValue": 0,
-        "lag": 0
+        "lag": 0,
+        "rate": "scalar",
+        "index": 0
       },
       {
         "name": "amp",
-        "rate": "scalar",
-        "index": 1,
         "defaultValue": 0.10000000149012,
-        "lag": 0
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 1,
+          "minval": 0,
+          "class": "ControlSpec",
+          "default": 0,
+          "rate": "control",
+          "step": 0,
+          "warp": "amp",
+          "units": ""
+        },
+        "index": 1
       },
       {
         "name": "sustain",
-        "rate": "scalar",
-        "index": 2,
         "defaultValue": 0.0099999997764826,
-        "lag": 0
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 16,
+          "minval": 0,
+          "class": "ControlSpec",
+          "default": 8,
+          "rate": "control",
+          "step": 0,
+          "warp": "linear",
+          "units": ""
+        },
+        "index": 2
       },
       {
         "name": "pan",
-        "rate": "scalar",
-        "index": 3,
         "defaultValue": 0,
-        "lag": 0
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 1,
+          "minval": -1,
+          "class": "ControlSpec",
+          "default": 0,
+          "rate": "control",
+          "step": 0,
+          "warp": "linear",
+          "units": ""
+        },
+        "index": 3
       }
     ],
     "canFreeSynth": true,
@@ -120,38 +160,78 @@
     "controls": [
       {
         "name": "out",
-        "rate": "scalar",
-        "index": 0,
         "defaultValue": 0,
-        "lag": 0
+        "lag": 0,
+        "rate": "scalar",
+        "index": 0
       },
       {
         "name": "amp",
-        "rate": "scalar",
-        "index": 1,
         "defaultValue": 0.10000000149012,
-        "lag": 0
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 1,
+          "minval": 0,
+          "class": "ControlSpec",
+          "default": 0,
+          "rate": "control",
+          "step": 0,
+          "warp": "amp",
+          "units": ""
+        },
+        "index": 1
       },
       {
         "name": "freq",
-        "rate": "scalar",
-        "index": 2,
         "defaultValue": 440,
-        "lag": 0
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 20000,
+          "minval": 20,
+          "class": "ControlSpec",
+          "default": 440,
+          "rate": "control",
+          "step": 0,
+          "warp": "exp",
+          "units": " Hz"
+        },
+        "index": 2
       },
       {
         "name": "sustain",
-        "rate": "scalar",
-        "index": 3,
         "defaultValue": 0.0099999997764826,
-        "lag": 0
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 16,
+          "minval": 0,
+          "class": "ControlSpec",
+          "default": 8,
+          "rate": "control",
+          "step": 0,
+          "warp": "linear",
+          "units": ""
+        },
+        "index": 3
       },
       {
         "name": "pan",
-        "rate": "scalar",
-        "index": 4,
         "defaultValue": 0,
-        "lag": 0
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 1,
+          "minval": -1,
+          "class": "ControlSpec",
+          "default": 0,
+          "rate": "control",
+          "step": 0,
+          "warp": "linear",
+          "units": ""
+        },
+        "index": 4
       }
     ],
     "canFreeSynth": true,
@@ -181,38 +261,78 @@
     "controls": [
       {
         "name": "out",
-        "rate": "scalar",
-        "index": 0,
         "defaultValue": 0,
-        "lag": 0
+        "lag": 0,
+        "rate": "scalar",
+        "index": 0
       },
       {
         "name": "amp",
-        "rate": "scalar",
-        "index": 1,
         "defaultValue": 0.10000000149012,
-        "lag": 0
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 1,
+          "minval": 0,
+          "class": "ControlSpec",
+          "default": 0,
+          "rate": "control",
+          "step": 0,
+          "warp": "amp",
+          "units": ""
+        },
+        "index": 1
       },
       {
         "name": "freq",
-        "rate": "scalar",
-        "index": 2,
         "defaultValue": 440,
-        "lag": 0
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 20000,
+          "minval": 20,
+          "class": "ControlSpec",
+          "default": 440,
+          "rate": "control",
+          "step": 0,
+          "warp": "exp",
+          "units": " Hz"
+        },
+        "index": 2
       },
       {
         "name": "sustain",
-        "rate": "scalar",
-        "index": 3,
         "defaultValue": 0.0099999997764826,
-        "lag": 0
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 16,
+          "minval": 0,
+          "class": "ControlSpec",
+          "default": 8,
+          "rate": "control",
+          "step": 0,
+          "warp": "linear",
+          "units": ""
+        },
+        "index": 3
       },
       {
         "name": "pan",
-        "rate": "scalar",
-        "index": 4,
         "defaultValue": 0,
-        "lag": 0
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 1,
+          "minval": -1,
+          "class": "ControlSpec",
+          "default": 0,
+          "rate": "control",
+          "step": 0,
+          "warp": "linear",
+          "units": ""
+        },
+        "index": 4
       }
     ],
     "canFreeSynth": true,
@@ -242,38 +362,78 @@
     "controls": [
       {
         "name": "out",
-        "rate": "scalar",
-        "index": 0,
         "defaultValue": 0,
-        "lag": 0
+        "lag": 0,
+        "rate": "scalar",
+        "index": 0
       },
       {
         "name": "amp",
-        "rate": "scalar",
-        "index": 1,
         "defaultValue": 0.10000000149012,
-        "lag": 0
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 1,
+          "minval": 0,
+          "class": "ControlSpec",
+          "default": 0,
+          "rate": "control",
+          "step": 0,
+          "warp": "amp",
+          "units": ""
+        },
+        "index": 1
       },
       {
         "name": "freq",
-        "rate": "scalar",
-        "index": 2,
         "defaultValue": 440,
-        "lag": 0
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 20000,
+          "minval": 20,
+          "class": "ControlSpec",
+          "default": 440,
+          "rate": "control",
+          "step": 0,
+          "warp": "exp",
+          "units": " Hz"
+        },
+        "index": 2
       },
       {
         "name": "sustain",
-        "rate": "scalar",
-        "index": 3,
         "defaultValue": 0.0099999997764826,
-        "lag": 0
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 16,
+          "minval": 0,
+          "class": "ControlSpec",
+          "default": 8,
+          "rate": "control",
+          "step": 0,
+          "warp": "linear",
+          "units": ""
+        },
+        "index": 3
       },
       {
         "name": "pan",
-        "rate": "scalar",
-        "index": 4,
         "defaultValue": 0,
-        "lag": 0
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 1,
+          "minval": -1,
+          "class": "ControlSpec",
+          "default": 0,
+          "rate": "control",
+          "step": 0,
+          "warp": "linear",
+          "units": ""
+        },
+        "index": 4
       }
     ],
     "canFreeSynth": true,
@@ -303,38 +463,78 @@
     "controls": [
       {
         "name": "out",
-        "rate": "scalar",
-        "index": 0,
         "defaultValue": 0,
-        "lag": 0
+        "lag": 0,
+        "rate": "scalar",
+        "index": 0
       },
       {
         "name": "amp",
-        "rate": "scalar",
-        "index": 1,
         "defaultValue": 0.10000000149012,
-        "lag": 0
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 1,
+          "minval": 0,
+          "class": "ControlSpec",
+          "default": 0,
+          "rate": "control",
+          "step": 0,
+          "warp": "amp",
+          "units": ""
+        },
+        "index": 1
       },
       {
         "name": "freq",
-        "rate": "scalar",
-        "index": 2,
         "defaultValue": 440,
-        "lag": 0
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 20000,
+          "minval": 20,
+          "class": "ControlSpec",
+          "default": 440,
+          "rate": "control",
+          "step": 0,
+          "warp": "exp",
+          "units": " Hz"
+        },
+        "index": 2
       },
       {
         "name": "sustain",
-        "rate": "scalar",
-        "index": 3,
         "defaultValue": 0.0099999997764826,
-        "lag": 0
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 16,
+          "minval": 0,
+          "class": "ControlSpec",
+          "default": 8,
+          "rate": "control",
+          "step": 0,
+          "warp": "linear",
+          "units": ""
+        },
+        "index": 3
       },
       {
         "name": "pan",
-        "rate": "scalar",
-        "index": 4,
         "defaultValue": 0,
-        "lag": 0
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 1,
+          "minval": -1,
+          "class": "ControlSpec",
+          "default": 0,
+          "rate": "control",
+          "step": 0,
+          "warp": "linear",
+          "units": ""
+        },
+        "index": 4
       }
     ],
     "canFreeSynth": true,

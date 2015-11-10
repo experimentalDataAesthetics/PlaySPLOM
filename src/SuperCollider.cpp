@@ -8,14 +8,12 @@
 
 #include "SuperCollider.hpp"
 #include <stdlib.h>
-#include <Poco/JSON/JSON.h>
+#include <json/json.h>
 #include <Poco/Pipe.h>
-#include <Poco/JSON/Parser.h>
-#include <Poco/Array.h>
-#include <Poco/Dynamic/Var.h>
 #include <string>
 #include <vector>
 #include <iostream>
+#include <fstream>
 #include "boost/filesystem.hpp"
 #include "ofMain.h"
 
@@ -23,8 +21,6 @@ using boost::filesystem::path;
 using boost::filesystem::current_path;
 using Poco::Process;
 using Poco::ProcessHandle;
-using Poco::JSON::Object;
-using Poco::DynamicStruct;
 using std::string;
 using std::vector;
 using std::cout;
@@ -78,34 +74,36 @@ void SuperCollider::loadSynthDefs() {
     }
     std::ifstream file(synthDefsJsonPath.string());
     if (file) {
-        Poco::JSON::Parser parser;
-        Poco::Dynamic::Var parsed = parser.parse(file);
-        Poco::Dynamic::Var result = parser.result();
+        Json::Value root;
+        Json::Reader reader;
+        bool ok = reader.parse(file, root, false);
         file.close();
+        if (!ok) {
+            std::cout  << reader.getFormatedErrorMessages() << endl;
+            return;
+        }
 
-        Poco::DynamicStruct jsonStruct =
-          *result.extract<Object::Ptr>();
-        for (Object::ConstIterator itr = jsonStruct.begin(), end = jsonStruct.end(); itr != end; ++itr) {
+        for (auto sdj : root) {
             SynthDef synthDef;
-            synthDef.name = itr->first;
-            auto defData = itr->second;
-            if (defData.isStruct()) {
-                DynamicStruct defStruct = jsonStruct[itr->first].extract<DynamicStruct>();
-                for (auto defPair : defStruct) {
-                    auto key = defPair.first;
-                    cout << key << endl;
-                    if (key == "controlNames") {
-                        auto lst = defPair.second;
-                        if (lst.isVector()) {
-                            for (auto controlName : lst) {
-                                synthDef.controls.push_back(controlName.toString());
-                            }
-                        }
-                    }
-                }
-            }
+            synthDef.name = sdj["name"].asString();
             cout << synthDef.name << endl;
-            synthDefs.push_back(synthDef);
+
+            for (auto cj : sdj["controls"]) {
+                Control control;
+                control.name = cj["name"].asString();
+                control.defaultValue = cj["defaultValue"].asFloat();
+                auto sj = cj["spec"];
+                if (!sj.isNull()) {
+                    control.spec.minval = sj["minval"].asFloat();
+                    control.spec.maxval = sj["maxval"].asFloat();
+                }
+                synthDef.controls.push_back(control);
+            }
+            synthDef.canFreeSynth = sdj["canFreeSynth"].asBool();
+
+            if (synthDef.canFreeSynth) {
+                synthDefs.push_back(synthDef);
+            }
         }
     }
 }
@@ -141,6 +139,5 @@ vector<string> SuperCollider::defNames() {
     }
     return names;
 }
-
 
 

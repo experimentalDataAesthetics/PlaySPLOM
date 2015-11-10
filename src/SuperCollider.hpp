@@ -22,9 +22,30 @@
 
 using SynthArgs = map<string, double>;
 
+struct ControlSpec {
+    double minval{0};
+    double maxval{1};
+};
+
+struct Control {
+    string name;
+    double defaultValue{0};
+    ControlSpec spec;
+};
+
 struct SynthDef {
     string name;
-    vector<string> controls;
+    vector<Control> controls;
+    bool canFreeSynth{false};
+
+    ControlSpec specAt(const string &argName) {
+        for (auto control : controls) {
+            if (control.name == argName) {
+                return control.spec;
+            }
+        }
+        return ControlSpec();
+    }
 };
 
 
