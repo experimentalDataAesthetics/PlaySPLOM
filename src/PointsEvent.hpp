@@ -25,7 +25,7 @@ enum class PointsEventType {
 
 class PointsEvent : public ofEventArgs {
  public:
-   explicit PointsEvent(PointsEventType type,
+    explicit PointsEvent(PointsEventType type,
                          BoxCoordinates &coords,
                          PointIndexSet &points)
                           : type(type),

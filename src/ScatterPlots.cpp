@@ -69,8 +69,7 @@ void ScatterPlots::redrawPlotter() {
         glScalef(1, -1, 1);
 
         ofSetCircleResolution(pointRadius * 4);
-        // auto&& access by reference
-        for (auto &box : boxes) {
+        for (auto const &box : boxes) {
             if (box.m != box.n) {
               // border
               ofSetColor(borderColor);

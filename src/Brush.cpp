@@ -5,14 +5,13 @@
 //  Created by Chris Sattinger on 15/10/15.
 //  Copyright 2015 Chris Sattinger
 //
-//
 
 #include "Brush.hpp"
 #include <stdio.h>
 #include <string>
 #include <set>
 #include "ScatterPlots.hpp"
-#include "style.h"
+#include "./style.h"
 #include "PointsEvent.hpp"
 using std::cout;
 using std::endl;

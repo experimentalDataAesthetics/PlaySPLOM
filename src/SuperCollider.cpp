@@ -51,7 +51,7 @@ void SuperCollider::setup() {
     ProcessHandle ph = Process::launch(command.c_str(), args);
     pid = ph.id();
     auto isRunning = Process::isRunning(pid);
-    cout << "scsynth pid: " << pid << " running: " << isRunning << endl;
+    cout << "Launched scsynth: " << pid << endl;
     // should check sometimes and report if dead
 
     sender.setup(HOST, PORT);
@@ -61,6 +61,7 @@ void SuperCollider::setup() {
 
 void SuperCollider::teardown() {
     if (pid) {
+        cout << "Terminating scsynth process: " << pid << endl;
         Process::requestTermination(pid);
         pid = -1;
     }
@@ -109,9 +110,8 @@ void SuperCollider::loadSynthDefs() {
 }
 
 
-
 /**
-  * Spawn a sound grain in root group
+  * Spawn a synth grain in the root Group
   */
 void SuperCollider::grain(const string &defName, SynthArgs args) {
     if (!pid) {
@@ -139,5 +139,3 @@ vector<string> SuperCollider::defNames() {
     }
     return names;
 }
-
-

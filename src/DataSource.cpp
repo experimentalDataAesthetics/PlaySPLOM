@@ -7,12 +7,12 @@
 //
 
 #include "DataSource.hpp"
+#include <boost/filesystem.hpp>
 #include <iostream>
 #include <sstream>
 #include <fstream>
 #include <string>
 #include <vector>
-#include <boost/filesystem.hpp>
 
 
 // using std::cout;

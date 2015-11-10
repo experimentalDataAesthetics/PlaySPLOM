@@ -6,6 +6,7 @@
 //  Copyright 2015 Chris Sattinger
 //
 
+#include <string>
 #include "Sonifier.hpp"
 #include "mapping.hpp"
 

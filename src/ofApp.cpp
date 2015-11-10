@@ -2,7 +2,9 @@
 #include "ofApp.h"
 #include "ofMain.h"
 #include <stdio.h>
-#include "style.h"
+#include "./style.h"
+
+
 
 //--------------------------------------------------------------
 void ofApp::setup() {
