@@ -1,2 +1,4 @@
-ofxGui
 ofxDatGui
+ofxGui
+ofxJSON
+ofxOsc
