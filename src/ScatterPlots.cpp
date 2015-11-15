@@ -90,7 +90,7 @@ void ScatterPlots::redrawPlotter() {
                   char label[20];
                   snprintf(label, sizeof(label), "%d,%d", box.m, box.n);
                   ofSetColor(labelColor);
-                  ofDrawBitmapString(label, gutter, gutter);
+                  // ofDrawBitmapString(label, gutter, gutter);
               } ofPopMatrix();
             } else {
                 // identity box: draw the label
