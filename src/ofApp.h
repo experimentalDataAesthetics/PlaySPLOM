@@ -56,6 +56,7 @@ class ofApp : public ofBaseApp {
     Sonifier sonifier{&scatterPlots, &superCollider};
     ofxDatGui* gui;
     GuiControls controls{};
+    bool openLoadDialog{false};
 };
 
 #endif  // SRC_OFAPP_H_

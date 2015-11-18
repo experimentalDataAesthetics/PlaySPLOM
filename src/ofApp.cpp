@@ -20,7 +20,6 @@ void ofApp::setup() {
             sonifier.selectSynthDef(0);
         }
     }
-    
     setupGui();
 }
 
@@ -50,6 +49,14 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
+    if (openLoadDialog) {
+        // initial load file dialog
+        ofFileDialogResult openFileResult = ofSystemLoadDialog("Select a CSV dataset file");
+        if (openFileResult.bSuccess) {
+            dataSource.load(openFileResult.getPath());
+        }
+        openLoadDialog = false;
+    }
     ofBackground(settingsBackground);
     scatterPlots.draw();
 }
@@ -115,7 +122,7 @@ void ofApp::dataSourceDidLoad() {
 
 void ofApp::onOfxDatGuiButtonEvent(ofxDatGuiButtonEvent e) {
     if (e.target == controls.loadButton) {
-        // initial load file dialog
+        openLoadDialog = true;
     }
 }
 
