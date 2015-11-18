@@ -24,6 +24,16 @@ void SynthDefMapping::init(SynthDef argSynthDef) {
         if (control.name == "sustain") {
             continue;
         }
+        if (control.name == "x") {
+            xArg = control.name;
+            xMap = LINEAR;
+            continue;
+        }
+        if (control.name == "y") {
+            yArg = control.name;
+            yMap = LINEAR;
+            continue;
+        }
         if (control.name == "freq") {
             yArg = control.name;
             yMap = FREQ;
@@ -37,12 +47,6 @@ void SynthDefMapping::init(SynthDef argSynthDef) {
             yArg = control.name;
             continue;
         }
-    }
-    if (xArg.empty()) {
-        xArg = "pan";
-    }
-    if (yArg.empty()) {
-        yArg = "sustain";
     }
 }
 
@@ -91,8 +95,12 @@ void Sonifier::sonifyPoint(ofPoint const &point) {
     args["sustain"] = sustain;
 
     SynthDefMapping mapping = mappings[synthDef.name];
-    args[mapping.xArg] = mapping.map(point.x, freqBase, mapping.xArg, mapping.xMap);
-    args[mapping.yArg] = mapping.map(point.y, freqBase, mapping.yArg, mapping.yMap);
+    if (!mapping.xArg.empty()) {
+        args[mapping.xArg] = mapping.map(point.x, freqBase, mapping.xArg, mapping.xMap);
+    }
+    if (!mapping.yArg.empty()) {
+        args[mapping.yArg] = mapping.map(point.y, freqBase, mapping.yArg, mapping.yMap);
+    }
 
     std::cout << synthDef.name << endl;
     superCollider->grain(synthDef.name, args);
