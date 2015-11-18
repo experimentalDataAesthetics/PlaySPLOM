@@ -58,7 +58,7 @@ double SynthDefMapping::map(double v, double freqBase, string const &argName, Ma
             break;
         case LINEAR:
         default:
-            return linlin(v, spec.minval, spec.maxval);
+            return linlin(v, 0.0, 1.0, spec.minval, spec.maxval);
             break;
     }
 }
