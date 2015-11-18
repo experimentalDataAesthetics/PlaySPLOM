@@ -92,12 +92,16 @@ void Brush::brushMoved(int x, int y, bool notify) {
         pointsUnderBrush.insert(p);
     }
     if (notify) {
+        BoxCoordinates box = focusedBox;
+        if (focusedBox.isNull()) {
+          box = hoveringBox;
+        }
         if (entering.size()) {
-            PointsEvent event = PointsEvent(PointsEventType::entering, hoveringBox, entering);
+            PointsEvent event = PointsEvent(PointsEventType::entering, box, entering);
             ofNotifyEvent(PointsEvent::events, event);
         }
         if (exiting.size()) {
-            PointsEvent event = PointsEvent(PointsEventType::exiting, hoveringBox, exiting);
+            PointsEvent event = PointsEvent(PointsEventType::exiting, box, exiting);
             ofNotifyEvent(PointsEvent::events, event);
         }
     }
