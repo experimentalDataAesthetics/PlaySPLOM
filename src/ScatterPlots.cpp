@@ -18,44 +18,62 @@ void ScatterPlots::draw() {
     ofSetColor(255, 255, 255);
     plotterFbo.draw(0, 0);
 
-    if (!brush.hoveringBox.isIdentityBox()) {
-        ofPushMatrix();
-        ofPushStyle();
-        // unflip opengl so that origin is bottom left, going up
-        glTranslated(0, plotterFbo.getHeight(), 0);
-        glScalef(1, -1, 1);
-        {
-            // hovering box
-            if (!brush.hoveringBox.isNull()) {
-                ofNoFill();
-                auto boxFrame = boxFrameAt(brush.hoveringBox);
-                ofSetColor(brush.engaged ? engagedFrameColor : hoverFrameColor);
-                ofDrawRectangle(boxFrame);
-                auto counterPartFrame = boxFrameAt(brush.hoveringBox.n, brush.hoveringBox.m);
-                ofDrawRectangle(counterPartFrame);
-                // fill the two identity boxes dark with white label
-                if (brush.engaged) {
-                    ofFill();
-                    ofSetColor(inverseBoxColor);
-                    auto boxM = boxFrameAt(brush.hoveringBox.m, brush.hoveringBox.m);
-                    ofDrawRectangle(boxM);
-                    auto boxN = boxFrameAt(brush.hoveringBox.n, brush.hoveringBox.n);
-                    ofDrawRectangle(boxN);
-                    // labels
-                    ofSetColor(inverseTextColor);
-                    ofDrawBitmapString(titles[brush.hoveringBox.m], boxM.x + gutter, boxM.y + boxFrame.height / 2);
-                    ofDrawBitmapString(titles[brush.hoveringBox.n], boxN.x + gutter, boxN.y + boxFrame.height / 2);
-                }
-            }
-            brush.draw();
-            highlightPoints(brush.pointsUnderBrush,
-                            brush.engaged ? engagedBrushColor : hoverPointColor,
-                            brush.engaged);
+    // stroke the hoveringBox
+    // stroke the focused box (one sonifying
+    // fill the focused||hovering labels boxes
+
+    ofPushMatrix();
+    ofPushStyle();
+    // unflip opengl so that origin is bottom left, going up
+    glTranslated(0, plotterFbo.getHeight(), 0);
+    glScalef(1, -1, 1);
+    {
+        // hovering box
+        if (!(brush.hoveringBox.isNull() || brush.hoveringBox.isIdentityBox())) {
+            colorBox(brush.hoveringBox, brush.engaged ? engagedFrameColor : hoverFrameColor, false, false);
         }
-        ofPopStyle();
-        ofPopMatrix();
+
+        BoxCoordinates fbox = brush.focusedBox;
+        if (fbox.isNull() && !brush.hoveringBox.isIdentityBox()) {
+            fbox = brush.hoveringBox;
+        }
+
+        if (!fbox.isNull()) {
+            // highlight the identity label boxes
+            BoxCoordinates mBox{fbox.m, fbox.m};
+            BoxCoordinates nBox{fbox.n, fbox.n};
+            colorBox(mBox, inverseBoxColor, true, true);
+            colorBox(nBox, inverseBoxColor, true, true);
+        }
+
+        brush.draw();
+        highlightPoints(brush.pointsUnderBrush,
+                        brush.engaged ? engagedBrushColor : hoverPointColor,
+                        brush.engaged);
     }
+    ofPopStyle();
+    ofPopMatrix();
 }
+
+void ScatterPlots::colorBox(const BoxCoordinates &box, const ofColor &color, bool fill, bool drawTitle) {
+    if (fill) {
+        ofFill();
+    } else {
+        ofNoFill();
+    }
+    auto boxFrame = boxFrameAt(box);
+    ofSetColor(color);
+    ofDrawRectangle(boxFrame);
+    auto counterPartFrame = boxFrameAt(box.n, box.m);
+    ofDrawRectangle(counterPartFrame);
+    if (drawTitle) {
+        ofSetColor(inverseTextColor);
+        ofDrawBitmapString(titles[box.m], boxFrame.x + gutter, boxFrame.y + boxFrame.height / 2);
+        ofDrawBitmapString(titles[box.n], boxFrame.x + gutter, boxFrame.y + boxFrame.height / 2);
+    }
+
+}
+
 
 void ScatterPlots::redrawPlotter() {
     plotterFbo.begin();
@@ -87,9 +105,9 @@ void ScatterPlots::redrawPlotter() {
                                    pointRadius);
                   }
                   // label each combo box (temporary)
-                  char label[20];
-                  snprintf(label, sizeof(label), "%d,%d", box.m, box.n);
-                  ofSetColor(labelColor);
+                   // char label[20];
+                  // snprintf(label, sizeof(label), "%d,%d", box.m, box.n);
+                  // ofSetColor(labelColor);
                   // ofDrawBitmapString(label, gutter, gutter);
               } ofPopMatrix();
             } else {

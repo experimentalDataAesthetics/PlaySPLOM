@@ -47,7 +47,11 @@ void Brush::brushMoved(int x, int y, bool notify) {
         BoxCoordinates nowHoveringBox = scatterPlots->boxForPoint(x, y);
         if (!nowHoveringBox.equals(hoveringBox)) {
             // cout << "new box" << endl;
-            hoveringBox = nowHoveringBox;
+            if (nowHoveringBox.isIdentityBox()) {
+                hoveringBox.setNull();
+            } else {
+                hoveringBox = nowHoveringBox;
+            }
             ofNotifyEvent(boxHoverEvent, hoveringBox, this);
         }
 
@@ -59,7 +63,7 @@ void Brush::brushMoved(int x, int y, bool notify) {
                                 brushHeight * diam);
     } else {
         hoveringBox.setNull();
-        brushRect.setFromCenter(-1, -1, 0 , 0);
+        brushRect.setFromCenter(-1, -1, 0, 0);
     }
 
     PointIndexSet currentPointsUnderBrush = pointsInRect(brushRect);
@@ -99,6 +103,22 @@ void Brush::brushMoved(int x, int y, bool notify) {
     }
 }
 
+void Brush::setFocusedBox(int x, int y) {
+    if (scatterPlots->frame.inside(x, y)) {
+        hoverCenter.x = x;
+        hoverCenter.y = y;
+
+        BoxCoordinates box = scatterPlots->boxForPoint(x, y);
+        if (!box.equals(focusedBox)) {
+            // cout << "new box" << endl;
+            focusedBox = box;
+            ofNotifyEvent(boxFocusEvent, focusedBox, this);
+        }
+    } else {
+        focusedBox.setNull();
+    }
+}
+
 //--------------------------------------------------------------
 void Brush::mouseDragged(int x, int y, int button) {
     engaged = true;
@@ -107,6 +127,11 @@ void Brush::mouseDragged(int x, int y, int button) {
 
 //--------------------------------------------------------------
 void Brush::mousePressed(int x, int y, int button) {
+    // cout << button << endl;
+    if (button == 2) {
+        setFocusedBox(x, y);
+        return;
+    }
     engaged = true;
     brushMoved(x, y, true);
 }

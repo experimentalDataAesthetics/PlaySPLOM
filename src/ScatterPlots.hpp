@@ -52,6 +52,7 @@ class ScatterPlots {
     };
 
     void updateBoxSizes();
+    void colorBox(const BoxCoordinates &box, const ofColor &color, bool fill, bool drawTitle);
     ofRectangle boxFrameAt(const BoxCoordinates &coords);
     ofRectangle boxFrameAt(int m, int n);
 

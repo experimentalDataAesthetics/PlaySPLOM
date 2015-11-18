@@ -51,7 +51,8 @@ class Brush {
 
  private:
     void brushMoved(int x, int y, bool notify);
-
+    void setFocusedBox(int x, int y);
+    
     ScatterPlots* scatterPlots;
     ofRectangle brushRect{-1, -1, 0, 0};
 };
