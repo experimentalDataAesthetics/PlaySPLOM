@@ -33,8 +33,8 @@ class Brush {
     PointIndexSet pointsInRect(const ofRectangle& rect);
 
     // ratio of point size
-    int brushWidth{4};
-    int brushHeight{4};
+    int brushWidth{2};
+    int brushHeight{2};
 
     bool engaged{false};
     ofPoint hoverCenter{0, 0};

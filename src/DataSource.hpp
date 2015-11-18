@@ -21,6 +21,7 @@ using DataPoint = std::vector<double>;
 class DataSource {
  public:
     void load(const std::string& pathName);
+    void mock();
 
     unsigned int numDimensions{0};
     std::vector<DataPoint> points{};

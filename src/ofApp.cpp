@@ -21,6 +21,7 @@ void ofApp::setup() {
         }
     }
     setupGui();
+    dataSource.mock();
 }
 
 void ofApp::setupGui() {

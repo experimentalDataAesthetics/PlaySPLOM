@@ -93,3 +93,36 @@ void DataSource::parseLine(const string& line) {
 
     points.push_back(point);
 }
+
+
+/** 
+  * Fill a data set with evenly distributed points
+  * in two dimensions for testing purposes.
+  */
+void DataSource::mock() {
+    titles.clear();
+    points.clear();
+    mins.clear();
+    maxes.clear();
+
+    title = "Test Data";
+    numDimensions = 2;
+    titles.push_back("x");
+    titles.push_back("y");
+    mins.push_back(0);
+    mins.push_back(0);
+    maxes.push_back(1);
+    maxes.push_back(1);
+    const int numPoints = 20;
+    for (auto x=0; x < numPoints; x++) {
+        for (auto y=0; y < numPoints; y++) {
+            vector<double> point;
+            point.push_back(double(x) / double(numPoints));
+            point.push_back(double(y) / double(numPoints));
+            // cout << point[0] << "@" << point[1] << endl;
+            points.push_back(point);
+        }
+    }
+    ofNotifyEvent(didLoadEvent, this);
+}
+
