@@ -71,7 +71,6 @@ void ScatterPlots::colorBox(const BoxCoordinates &box, const ofColor &color, boo
         ofDrawBitmapString(titles[box.m], boxFrame.x + gutter, boxFrame.y + boxFrame.height / 2);
         ofDrawBitmapString(titles[box.n], boxFrame.x + gutter, boxFrame.y + boxFrame.height / 2);
     }
-
 }
 
 
@@ -105,7 +104,7 @@ void ScatterPlots::redrawPlotter() {
                                    pointRadius);
                   }
                   // label each combo box (temporary)
-                   // char label[20];
+                  // char label[20];
                   // snprintf(label, sizeof(label), "%d,%d", box.m, box.n);
                   // ofSetColor(labelColor);
                   // ofDrawBitmapString(label, gutter, gutter);

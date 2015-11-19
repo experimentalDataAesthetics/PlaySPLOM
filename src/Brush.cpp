@@ -27,9 +27,6 @@ void Brush::draw() {
     ofFill();
     ofSetColor(engaged ? engagedBrushColor : hoverBrushColor);
     ofDrawRectangle(brushRect);
-
-    // hovering box
-    // focused box
 }
 
 //--------------------------------------------------------------
@@ -96,8 +93,8 @@ void Brush::brushMoved(int x, int y, bool notify) {
         if (focusedBox.isNull()) {
           box = hoveringBox;
         }
-        if (entering.size()) {
             PointsEvent event = PointsEvent(PointsEventType::entering, box, entering);
+        if (entering.size()) {
             ofNotifyEvent(PointsEvent::events, event);
         }
         if (exiting.size()) {
