@@ -67,6 +67,28 @@ double SynthDefMapping::map(double v, double freqBase, string const &argName, Ma
     }
 }
 
+string SynthDefMapping::xDescription() {
+    std::ostringstream stringStream;
+    if (xArg.empty()) {
+        stringStream << "(unmapped)";
+    } else {
+        auto spec = synthDef.specAt(xArg);
+        stringStream << xArg << " (" << spec.minval << ", " << spec.maxval << ")";
+    }
+    return stringStream.str();
+}
+
+string SynthDefMapping::yDescription() {
+    std::ostringstream stringStream;
+    if (yArg.empty()) {
+        stringStream << "(unmapped)";
+    } else {
+        auto spec = synthDef.specAt(yArg);
+        stringStream << yArg << " (" << spec.minval << ", " << spec.maxval << ")";
+    }
+    return stringStream.str();
+}
+
 
 void Sonifier::setup() {
     ofAddListener(PointsEvent::events, this, &Sonifier::pointsEntered);
@@ -114,6 +136,7 @@ void Sonifier::selectSynthDef(int i) {
             sdm.init(synthDef);
             mappings[synthDef.name] = sdm;
         }
+        ofNotifyEvent(synthDefSelectedEvent, this);
     }
 }
 

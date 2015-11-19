@@ -32,9 +32,11 @@ class ofApp : public ofBaseApp {
 
     // events
     void dataSourceDidLoad();
+    void synthDefDidLoad();
     void onOfxDatGuiButtonEvent(ofxDatGuiButtonEvent e);
     void onOfxDatGuiDropdownEvent(ofxDatGuiDropdownEvent e);
     void onOfxDatGuiSliderEvent(ofxDatGuiSliderEvent e);
+    void pointsEntered(PointsEvent &event);
 
  private:
     struct GuiControls {
@@ -46,10 +48,12 @@ class ofApp : public ofBaseApp {
         ofxDatGuiSlider *amp;
         ofxDatGuiSlider *sustain;
         ofxDatGuiSlider *freqBase;
+        ofxDatGuiValuePlotter *x;
+        ofxDatGuiValuePlotter *y;
     };
 
     void setupGui();
-    
+
     DataSource dataSource{};
     ScatterPlots scatterPlots{};
     SuperCollider superCollider;

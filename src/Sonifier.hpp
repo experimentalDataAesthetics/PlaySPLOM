@@ -34,6 +34,9 @@ class SynthDefMapping {
     MappingAlgo xMap{LINEAR};
     string yArg;
     MappingAlgo yMap{LINEAR};
+
+    string xDescription();
+    string yDescription();
 };
 
 
@@ -55,6 +58,8 @@ class Sonifier {
 
     SynthDef synthDef;
     std::map<std::string, SynthDefMapping> mappings;
+
+    ofEvent<void> synthDefSelectedEvent;
 
  private:
     void setup();

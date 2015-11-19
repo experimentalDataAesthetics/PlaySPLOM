@@ -22,6 +22,11 @@ void ofApp::setup() {
     }
     setupGui();
     dataSource.mock();
+
+    ofAddListener(sonifier.synthDefSelectedEvent, this, &ofApp::synthDefDidLoad);
+    synthDefDidLoad();
+
+    ofAddListener(PointsEvent::events, this, &ofApp::pointsEntered);
 }
 
 void ofApp::setupGui() {
@@ -35,6 +40,11 @@ void ofApp::setupGui() {
     controls.amp = gui->addSlider("Amp", 0.0, 1.0, sonifier.amp);
     controls.sustain = gui->addSlider("Sustain", 0.005, 1.0, sonifier.sustain);
     controls.freqBase = gui->addSlider("Freq", 220, 3520, sonifier.freqBase);
+
+    controls.x = gui->addValuePlotter("x", 0.0, 1.0);
+    controls.x->setDrawMode(ofxDatGuiGraph::POINTS);
+    controls.y = gui->addValuePlotter("y", 0.0, 1.0);
+    controls.y->setDrawMode(ofxDatGuiGraph::POINTS);
 
     // gui->addColorPicker("Brush Color", engagedPointColor);
     gui->addFRM(1.0f);
@@ -120,6 +130,11 @@ void ofApp::dataSourceDidLoad() {
     controls.loadButton->setLabel(dataSource.title);
 }
 
+void ofApp::synthDefDidLoad() {
+    auto mapping = sonifier.mappings[sonifier.synthDef.name];
+    controls.x->setLabel(mapping.xDescription());
+    controls.y->setLabel(mapping.yDescription());
+}
 
 void ofApp::onOfxDatGuiButtonEvent(ofxDatGuiButtonEvent e) {
     if (e.target == controls.loadButton) {
@@ -147,5 +162,16 @@ void ofApp::onOfxDatGuiSliderEvent(ofxDatGuiSliderEvent e) {
         sonifier.sustain = e.value;
     } else if (e.target == controls.freqBase) {
         sonifier.freqBase = e.value;
+    }
+}
+
+void ofApp::pointsEntered(PointsEvent &event) {
+    if (event.type == PointsEventType::entering) {
+        auto normalizedPoints = scatterPlots.normalizedPointsAtBox(event.coords);
+        for (auto p : event.points) {
+            auto np = normalizedPoints.at(p);
+            controls.x->setValue(np[0]);
+            controls.y->setValue(np[1]);
+        }
     }
 }
