@@ -1,0 +1,778 @@
+{
+  "shockwave-spring": {
+    "hasArrayArgs": false,
+    "inputs": [],
+    "hasGate": false,
+    "name": "shockwave-spring",
+    "hasVariants": false,
+    "output": [
+      {
+        "rate": "audio",
+        "startingChannel": 0,
+        "numberOfChannels": 1,
+        "type": "Out"
+      },
+      {
+        "rate": "audio",
+        "startingChannel": 1,
+        "numberOfChannels": 1,
+        "type": "Out"
+      }
+    ],
+    "controls": [
+      {
+        "name": "springfac",
+        "defaultValue": 15000,
+        "lag": 0,
+        "rate": "control",
+        "index": 0
+      },
+      {
+        "name": "damp",
+        "defaultValue": 0.0007999999797903,
+        "lag": 0,
+        "rate": "control",
+        "index": 1
+      },
+      {
+        "name": "amp",
+        "defaultValue": 0.5,
+        "lag": 0,
+        "rate": "control",
+        "spec": {
+          "maxval": 1,
+          "minval": 0,
+          "class": "ControlSpec",
+          "default": 0,
+          "rate": "control",
+          "step": 0,
+          "warp": "amp",
+          "units": ""
+        },
+        "index": 2
+      }
+    ],
+    "canFreeSynth": true,
+    "sourceCode": "SynthDef('shockwave-spring', { | springfac = 15000, damp = 0.0008 amp = 0.5|var f; //modulated input forcevar s;var env = Env([0, 0.2, 0], [0.02, 0.02, 0.02],[-5, 5, 5]);f = Pulse.ar(0.5)*EnvGen.kr(env);s = Spring.ar(f, springfac, damp);DetectSilence.ar(s, doneAction:2);Out.ar([0,1],amp*s);})",
+    "controlNames": [
+      "springfac",
+      "damp",
+      "amp"
+    ]
+  },
+  "noiseburst": {
+    "hasArrayArgs": false,
+    "inputs": [],
+    "hasGate": false,
+    "name": "noiseburst",
+    "hasVariants": false,
+    "output": [
+      {
+        "rate": "audio",
+        "startingChannel": "out",
+        "numberOfChannels": 2,
+        "type": "OffsetOut"
+      }
+    ],
+    "controls": [
+      {
+        "name": "out",
+        "defaultValue": 0,
+        "lag": 0,
+        "rate": "scalar",
+        "index": 0
+      },
+      {
+        "name": "amp",
+        "defaultValue": 0.10000000149012,
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 1,
+          "minval": 0,
+          "class": "ControlSpec",
+          "default": 0,
+          "rate": "control",
+          "step": 0,
+          "warp": "amp",
+          "units": ""
+        },
+        "index": 1
+      },
+      {
+        "name": "sustain",
+        "defaultValue": 0.0099999997764826,
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 16,
+          "minval": 0,
+          "class": "ControlSpec",
+          "default": 8,
+          "rate": "control",
+          "step": 0,
+          "warp": "linear",
+          "units": ""
+        },
+        "index": 2
+      },
+      {
+        "name": "pan",
+        "defaultValue": 0,
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 1,
+          "minval": -1,
+          "class": "ControlSpec",
+          "default": 0,
+          "rate": "control",
+          "step": 0,
+          "warp": "linear",
+          "units": ""
+        },
+        "index": 3
+      }
+    ],
+    "canFreeSynth": true,
+    "sourceCode": "SynthDef('noiseburst', { |out, amp=0.1, sustain=0.01, pan|var snd = PinkNoise.ar(1.0);var amp2 = amp * AmpComp.ir(1.max(50)) * 0.5;var env = EnvGen.ar(Env.sine(sustain, amp2), doneAction: 2);OffsetOut.ar(out, Pan2.ar(snd * env, pan));})",
+    "controlNames": [
+      "out",
+      "amp",
+      "sustain",
+      "pan"
+    ]
+  },
+  "shockwave-microsound-2": {
+    "hasArrayArgs": false,
+    "inputs": [],
+    "hasGate": false,
+    "name": "shockwave-microsound-2",
+    "hasVariants": false,
+    "output": [
+      {
+        "rate": "audio",
+        "startingChannel": "out",
+        "numberOfChannels": 2,
+        "type": "OffsetOut"
+      }
+    ],
+    "controls": [
+      {
+        "name": "out",
+        "defaultValue": 0,
+        "lag": 0,
+        "rate": "scalar",
+        "index": 0
+      },
+      {
+        "name": "amp",
+        "defaultValue": 0.10000000149012,
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 1,
+          "minval": 0,
+          "class": "ControlSpec",
+          "default": 0,
+          "rate": "control",
+          "step": 0,
+          "warp": "amp",
+          "units": ""
+        },
+        "index": 1
+      },
+      {
+        "name": "freq",
+        "defaultValue": 440,
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 20000,
+          "minval": 20,
+          "class": "ControlSpec",
+          "default": 440,
+          "rate": "control",
+          "step": 0,
+          "warp": "exp",
+          "units": " Hz"
+        },
+        "index": 2
+      },
+      {
+        "name": "sustain",
+        "defaultValue": 0.0099999997764826,
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 16,
+          "minval": 0,
+          "class": "ControlSpec",
+          "default": 8,
+          "rate": "control",
+          "step": 0,
+          "warp": "linear",
+          "units": ""
+        },
+        "index": 3
+      },
+      {
+        "name": "pan",
+        "defaultValue": 0,
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 1,
+          "minval": -1,
+          "class": "ControlSpec",
+          "default": 0,
+          "rate": "control",
+          "step": 0,
+          "warp": "linear",
+          "units": ""
+        },
+        "index": 4
+      }
+    ],
+    "canFreeSynth": true,
+    "sourceCode": "SynthDef('shockwave-microsound-2', { |out, amp=0.1, freq=440, sustain=0.01, pan|var snd = FSinOsc.ar(freq);var amp2 = amp * AmpComp.ir(freq.max(50)) * 0.5;var env = EnvGen.ar(Env.sine(sustain, amp2), doneAction: 2);OffsetOut.ar(out, Pan2.ar(snd * env, pan));})",
+    "controlNames": [
+      "out",
+      "amp",
+      "freq",
+      "sustain",
+      "pan"
+    ]
+  },
+  "grainFM": {
+    "hasArrayArgs": false,
+    "inputs": [],
+    "hasGate": false,
+    "name": "grainFM",
+    "hasVariants": false,
+    "output": [
+      {
+        "rate": "audio",
+        "startingChannel": "out",
+        "numberOfChannels": 2,
+        "type": "OffsetOut"
+      }
+    ],
+    "controls": [
+      {
+        "name": "out",
+        "defaultValue": 0,
+        "lag": 0,
+        "rate": "scalar",
+        "index": 0
+      },
+      {
+        "name": "carfreq",
+        "defaultValue": 440,
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 20000,
+          "minval": 20,
+          "class": "ControlSpec",
+          "default": 440,
+          "rate": "control",
+          "step": 0,
+          "warp": "exp",
+          "units": " Hz"
+        },
+        "index": 1
+      },
+      {
+        "name": "modfreq",
+        "defaultValue": 20,
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 20000,
+          "minval": 20,
+          "class": "ControlSpec",
+          "default": 440,
+          "rate": "control",
+          "step": 0,
+          "warp": "exp",
+          "units": " Hz"
+        },
+        "index": 2
+      },
+      {
+        "name": "moddepth",
+        "defaultValue": 1,
+        "lag": 0,
+        "rate": "scalar",
+        "index": 3
+      },
+      {
+        "name": "sustain",
+        "defaultValue": 0.019999999552965,
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 16,
+          "minval": 0,
+          "class": "ControlSpec",
+          "default": 8,
+          "rate": "control",
+          "step": 0,
+          "warp": "linear",
+          "units": ""
+        },
+        "index": 4
+      },
+      {
+        "name": "amp",
+        "defaultValue": 0.10000000149012,
+        "lag": 0,
+        "rate": "control",
+        "spec": {
+          "maxval": 1,
+          "minval": 0,
+          "class": "ControlSpec",
+          "default": 0,
+          "rate": "control",
+          "step": 0,
+          "warp": "amp",
+          "units": ""
+        },
+        "index": 5
+      },
+      {
+        "name": "pan",
+        "defaultValue": 0,
+        "lag": 0,
+        "rate": "control",
+        "spec": {
+          "maxval": 1,
+          "minval": -1,
+          "class": "ControlSpec",
+          "default": 0,
+          "rate": "control",
+          "step": 0,
+          "warp": "linear",
+          "units": ""
+        },
+        "index": 6
+      }
+    ],
+    "canFreeSynth": true,
+    "sourceCode": "SynthDef('grainFM', {|out, carfreq=440, modfreq=20, moddepth = 1, sustain=0.02, amp=0.1, pan|var env = EnvGen.ar(Env.sine(sustain, amp), doneAction: 2);var sound = SinOsc.ar(carfreq, SinOsc.ar(modfreq) * moddepth) * env;OffsetOut.ar(out, Pan2.ar(sound, pan))})",
+    "controlNames": [
+      "out",
+      "carfreq",
+      "modfreq",
+      "moddepth",
+      "sustain",
+      "amp",
+      "pan"
+    ]
+  },
+  "grain2": {
+    "hasArrayArgs": false,
+    "inputs": [],
+    "hasGate": false,
+    "name": "grain2",
+    "hasVariants": false,
+    "output": [
+      {
+        "rate": "audio",
+        "startingChannel": "out",
+        "numberOfChannels": 2,
+        "type": "OffsetOut"
+      }
+    ],
+    "controls": [
+      {
+        "name": "out",
+        "defaultValue": 0,
+        "lag": 0,
+        "rate": "scalar",
+        "index": 0
+      },
+      {
+        "name": "amp",
+        "defaultValue": 0.10000000149012,
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 1,
+          "minval": 0,
+          "class": "ControlSpec",
+          "default": 0,
+          "rate": "control",
+          "step": 0,
+          "warp": "amp",
+          "units": ""
+        },
+        "index": 1
+      },
+      {
+        "name": "freq",
+        "defaultValue": 440,
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 20000,
+          "minval": 20,
+          "class": "ControlSpec",
+          "default": 440,
+          "rate": "control",
+          "step": 0,
+          "warp": "exp",
+          "units": " Hz"
+        },
+        "index": 2
+      },
+      {
+        "name": "sustain",
+        "defaultValue": 0.0099999997764826,
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 16,
+          "minval": 0,
+          "class": "ControlSpec",
+          "default": 8,
+          "rate": "control",
+          "step": 0,
+          "warp": "linear",
+          "units": ""
+        },
+        "index": 3
+      },
+      {
+        "name": "pan",
+        "defaultValue": 0,
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 1,
+          "minval": -1,
+          "class": "ControlSpec",
+          "default": 0,
+          "rate": "control",
+          "step": 0,
+          "warp": "linear",
+          "units": ""
+        },
+        "index": 4
+      }
+    ],
+    "canFreeSynth": true,
+    "sourceCode": "SynthDef('grain2', { |out, amp=0.1, freq=440, sustain=0.01, pan|var snd = FSinOsc.ar(freq);var amp2 = amp * AmpComp.ir(freq.max(50)) * 0.5;var env = EnvGen.ar(Env.perc(0.01, 0.09), doneAction: 2);OffsetOut.ar(out, Pan2.ar(snd * env, pan));})",
+    "controlNames": [
+      "out",
+      "amp",
+      "freq",
+      "sustain",
+      "pan"
+    ]
+  },
+  "grain": {
+    "hasArrayArgs": false,
+    "inputs": [],
+    "hasGate": false,
+    "name": "grain",
+    "hasVariants": false,
+    "output": [
+      {
+        "rate": "audio",
+        "startingChannel": "out",
+        "numberOfChannels": 2,
+        "type": "OffsetOut"
+      }
+    ],
+    "controls": [
+      {
+        "name": "out",
+        "defaultValue": 0,
+        "lag": 0,
+        "rate": "scalar",
+        "index": 0
+      },
+      {
+        "name": "amp",
+        "defaultValue": 0.10000000149012,
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 1,
+          "minval": 0,
+          "class": "ControlSpec",
+          "default": 0,
+          "rate": "control",
+          "step": 0,
+          "warp": "amp",
+          "units": ""
+        },
+        "index": 1
+      },
+      {
+        "name": "freq",
+        "defaultValue": 440,
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 20000,
+          "minval": 20,
+          "class": "ControlSpec",
+          "default": 440,
+          "rate": "control",
+          "step": 0,
+          "warp": "exp",
+          "units": " Hz"
+        },
+        "index": 2
+      },
+      {
+        "name": "sustain",
+        "defaultValue": 0.0099999997764826,
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 16,
+          "minval": 0,
+          "class": "ControlSpec",
+          "default": 8,
+          "rate": "control",
+          "step": 0,
+          "warp": "linear",
+          "units": ""
+        },
+        "index": 3
+      },
+      {
+        "name": "pan",
+        "defaultValue": 0,
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 1,
+          "minval": -1,
+          "class": "ControlSpec",
+          "default": 0,
+          "rate": "control",
+          "step": 0,
+          "warp": "linear",
+          "units": ""
+        },
+        "index": 4
+      }
+    ],
+    "canFreeSynth": true,
+    "sourceCode": "SynthDef('grain', { |out, amp=0.1, freq=440, sustain=0.01, pan|var snd = FSinOsc.ar(freq);var amp2 = amp * AmpComp.ir(freq.max(50)) * 0.5;var env = EnvGen.ar(Env.sine(sustain, amp2), doneAction: 2);OffsetOut.ar(out, Pan2.ar(snd * env, pan));})",
+    "controlNames": [
+      "out",
+      "amp",
+      "freq",
+      "sustain",
+      "pan"
+    ]
+  },
+  "shockwave-microsound": {
+    "hasArrayArgs": false,
+    "inputs": [],
+    "hasGate": false,
+    "name": "shockwave-microsound",
+    "hasVariants": false,
+    "output": [
+      {
+        "rate": "audio",
+        "startingChannel": "out",
+        "numberOfChannels": 2,
+        "type": "OffsetOut"
+      }
+    ],
+    "controls": [
+      {
+        "name": "out",
+        "defaultValue": 0,
+        "lag": 0,
+        "rate": "scalar",
+        "index": 0
+      },
+      {
+        "name": "amp",
+        "defaultValue": 0.10000000149012,
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 1,
+          "minval": 0,
+          "class": "ControlSpec",
+          "default": 0,
+          "rate": "control",
+          "step": 0,
+          "warp": "amp",
+          "units": ""
+        },
+        "index": 1
+      },
+      {
+        "name": "freq",
+        "defaultValue": 440,
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 20000,
+          "minval": 20,
+          "class": "ControlSpec",
+          "default": 440,
+          "rate": "control",
+          "step": 0,
+          "warp": "exp",
+          "units": " Hz"
+        },
+        "index": 2
+      },
+      {
+        "name": "sustain",
+        "defaultValue": 0.0099999997764826,
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 16,
+          "minval": 0,
+          "class": "ControlSpec",
+          "default": 8,
+          "rate": "control",
+          "step": 0,
+          "warp": "linear",
+          "units": ""
+        },
+        "index": 3
+      },
+      {
+        "name": "pan",
+        "defaultValue": 0,
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 1,
+          "minval": -1,
+          "class": "ControlSpec",
+          "default": 0,
+          "rate": "control",
+          "step": 0,
+          "warp": "linear",
+          "units": ""
+        },
+        "index": 4
+      }
+    ],
+    "canFreeSynth": true,
+    "sourceCode": "SynthDef('shockwave-microsound', { |out, amp=0.1, freq=440, sustain=0.01, pan|var snd = FSinOsc.ar(freq);var amp2 = amp * AmpComp.ir(freq.max(50)) * 0.5;var env = EnvGen.ar(Env.sine(sustain, amp2), doneAction: 2);OffsetOut.ar(out, Pan2.ar(snd * env, pan));})",
+    "controlNames": [
+      "out",
+      "amp",
+      "freq",
+      "sustain",
+      "pan"
+    ]
+  },
+  "grain3": {
+    "hasArrayArgs": false,
+    "inputs": [],
+    "hasGate": false,
+    "name": "grain3",
+    "hasVariants": false,
+    "output": [
+      {
+        "rate": "audio",
+        "startingChannel": "out",
+        "numberOfChannels": 1,
+        "type": "OffsetOut"
+      }
+    ],
+    "controls": [
+      {
+        "name": "out",
+        "defaultValue": 0,
+        "lag": 0,
+        "rate": "scalar",
+        "index": 0
+      },
+      {
+        "name": "amp",
+        "defaultValue": 0.10000000149012,
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 1,
+          "minval": 0,
+          "class": "ControlSpec",
+          "default": 0,
+          "rate": "control",
+          "step": 0,
+          "warp": "amp",
+          "units": ""
+        },
+        "index": 1
+      },
+      {
+        "name": "freq",
+        "defaultValue": 440,
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 20000,
+          "minval": 20,
+          "class": "ControlSpec",
+          "default": 440,
+          "rate": "control",
+          "step": 0,
+          "warp": "exp",
+          "units": " Hz"
+        },
+        "index": 2
+      },
+      {
+        "name": "sustain",
+        "defaultValue": 0.0099999997764826,
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 16,
+          "minval": 0,
+          "class": "ControlSpec",
+          "default": 8,
+          "rate": "control",
+          "step": 0,
+          "warp": "linear",
+          "units": ""
+        },
+        "index": 3
+      },
+      {
+        "name": "pan",
+        "defaultValue": 0,
+        "lag": 0,
+        "rate": "scalar",
+        "spec": {
+          "maxval": 1,
+          "minval": -1,
+          "class": "ControlSpec",
+          "default": 0,
+          "rate": "control",
+          "step": 0,
+          "warp": "linear",
+          "units": ""
+        },
+        "index": 4
+      }
+    ],
+    "canFreeSynth": true,
+    "sourceCode": "SynthDef('grain3', { |out, amp=0.1, freq=440, sustain=0.01, pan|/*var snd = LFSaw.ar(freq);var amp2 = amp * AmpComp.ir(freq.max(50)) * 0.05;var env = EnvGen.ar(Env.perc(sustain, 0.09), doneAction: 2);  // not paying any attention to me eh?snd = SinOsc.ar(freq);OffsetOut.ar(out, Pan2.ar(snd * env, pan, amp2));*/  OffsetOut.ar(out, SinOsc.ar(440) * EnvGen.ar(Env.perc, doneAction: 2));})",
+    "controlNames": [
+      "out",
+      "amp",
+      "freq",
+      "sustain",
+      "pan"
+    ]
+  }
+}
