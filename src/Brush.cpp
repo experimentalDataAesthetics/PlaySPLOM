@@ -134,6 +134,8 @@ void Brush::mousePressed(int x, int y, int button) {
         return;
     }
     engaged = true;
+    // all are entering now
+    pointsUnderBrush.clear();
     brushMoved(x, y, true);
 }
 
