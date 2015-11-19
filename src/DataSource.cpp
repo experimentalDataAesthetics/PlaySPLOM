@@ -113,7 +113,7 @@ void DataSource::mock() {
     mins.push_back(0);
     maxes.push_back(1);
     maxes.push_back(1);
-    const int numPoints = 20;
+    const int numPoints = 40;
     for (auto x=0; x < numPoints; x++) {
         for (auto y=0; y < numPoints; y++) {
             vector<double> point;
