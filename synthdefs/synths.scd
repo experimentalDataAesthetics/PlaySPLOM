@@ -1,7 +1,8 @@
 
 // define any spec ranges for argument names used in SynthDefs
-Spec.specs.put(\carfreq, ControlSpec(20, 20000, 'exp', 0, 440, " Hz"));
-Spec.specs.put(\modfreq, ControlSpec(20, 20000, 'exp', 0, 440, " Hz"));
+Spec.specs.put(\freq, ControlSpec(40, 10000, 'exp', 0, 440, " Hz"));
+Spec.specs.put(\carfreq, ControlSpec(40, 10000, 'exp', 0, 440, " Hz"));
+Spec.specs.put(\modfreq, ControlSpec(40, 10000, 'exp', 0, 440, " Hz"));
 
 
 SynthDef("grain", { |out, amp=0.1, freq=440, sustain=0.01, pan|
@@ -15,7 +16,7 @@ SynthDef("grain", { |out, amp=0.1, freq=440, sustain=0.01, pan|
 SynthDef("noiseburst", { |out, amp=0.1, sustain=0.01, pan|
 	var snd = PinkNoise.ar(1.0);
 	var amp2 = amp * AmpComp.ir(1.max(50)) * 0.5;
-	var env = EnvGen.ar(Env.sine(sustain, amp2), doneAction: 2);
+	var env = EnvGen.ar(Env.sine(sustain, 1.0), levelScale: amp2, doneAction: 2);
 	OffsetOut.ar(out, Pan2.ar(snd * env, pan));
 }, \ir ! 5).add;
 
@@ -31,8 +32,8 @@ SynthDef("grain2", { |out, amp=0.1, freq=440, sustain=0.01, pan|
 SynthDef("grain3", { |out, amp=0.1, freq=440, sustain=0.01, pan|
 	var snd = LFSaw.ar(freq);
 	var amp2 = amp * AmpComp.ir(freq.max(50)) * 0.5;
-	var env = EnvGen.ar(Env.perc(sustain, 0.09), doneAction: 2) * amp2;
-	OffsetOut.ar(out, Pan2.ar(snd * env, pan));
+	var env = EnvGen.ar(Env.perc(1.0, 1.0), timeScale: sustain, levelScale: amp2, doneAction: 2);
+	OffsetOut.ar(out, Pan2.ar(snd, pan, env));
 }, \ir ! 5).add;
 
 

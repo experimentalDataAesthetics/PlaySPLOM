@@ -1,3 +1,4 @@
+Spec.specs.put(\freq, ControlSpec(40, 10000, 'exp', 0, 440, " Hz"));
 
 SynthDef("shockwave-microsound", { |out, amp=0.1, freq=440, sustain=0.01, pan|
 	var snd = FSinOsc.ar(freq);
