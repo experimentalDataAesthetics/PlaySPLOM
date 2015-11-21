@@ -43,19 +43,22 @@ void SuperCollider::setup() {
     args.push_back("-R");
     args.push_back("0");
 
-    // load defs
-    setenv("SC_SYNTHDEF_PATH", synthDefPath.c_str(), 1);
-    args.push_back("-D");
-    args.push_back("1");
-
     ProcessHandle ph = Process::launch(command.c_str(), args);
     pid = ph.id();
     auto isRunning = Process::isRunning(pid);
     cout << "Launched scsynth: " << pid << endl;
     // should check sometimes and report if dead
+    // It will die if the port is already in use by another scsynth
+    // but we will still connect now to that pre-existing one.
 
     sender.setup(HOST, PORT);
     loadSynthDefs();
+
+    // load defs
+    ofxOscMessage msg;
+    msg.setAddress("/_loadDir");
+    msg.addStringArg(synthDefPath.c_str());
+    sender.sendMessage(msg);
 }
 
 
