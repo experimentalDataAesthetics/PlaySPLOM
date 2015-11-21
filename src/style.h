@@ -12,21 +12,21 @@
 
 #include "ofMain.h"
 
-const ofColor plotterBackground = ofColor(255);
-const ofColor settingsBackground = ofColor(131, 140, 145);
+const ofColor plotterBackground = ofColor(230);
+const ofColor settingsBackground = ofColor(230);
 const ofColor labelColor = ofColor(10);
 const ofColor borderColor = ofColor(164, 164, 162);  // rgb(164, 164, 163)
-const ofColor pointColor = ofColor(0, 130, 255, 120);
-const ofColor hoverPointColor = ofColor(0, 250, 20, 120);
-const ofColor hoverFrameColor = ofColor(0, 250, 20);
-const ofColor hoverBrushColor = ofColor(50, 250, 50, 120);
+const ofColor pointColor = ofColor(20, 160);
+const ofColor hoverPointColor = ofColor(255, 0, 0, 120);
+const ofColor hoverFrameColor = ofColor(0, 50, 250);
+const ofColor hoverBrushColor = ofColor(255, 0, 0, 120);
 
-const ofColor engagedPointColor = ofColor(0, 250, 20, 120);
-const ofColor engagedFrameColor = ofColor(100, 250, 50);
-const ofColor engagedBrushColor = ofColor(100, 250, 50, 120);
+const ofColor engagedPointColor = ofColor(255, 0, 0, 120);
+const ofColor engagedFrameColor = ofColor(0, 0, 250);
+const ofColor engagedBrushColor = ofColor(250, 0, 0, 120);
 
 // the label/identity box background color when brush is engaged
-const ofColor inverseBoxColor = ofColor(0, 250, 20, 40);
+const ofColor inverseBoxColor = ofColor(0, 20, 250, 40);
 const ofColor inverseTextColor = ofColor(0);
 
 const int gutter = 5;
